@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('genre', {
+    sequelize.define('platform', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -14,8 +14,7 @@ module.exports = (sequelize) => {
         },
         source: {
             type: DataTypes.ENUM("API", "ID"),
-            allowNull: false,
-            // primaryKey: true
+            allowNull: false
         }
     },{
         timestamps: false

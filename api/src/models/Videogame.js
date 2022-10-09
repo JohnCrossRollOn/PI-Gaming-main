@@ -8,7 +8,8 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       primaryKey:true,
       autoIncrement: true,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     name: {
       type: DataTypes.STRING,
@@ -23,10 +24,21 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     rating: {
-      type: DataTypes.INTEGER
+      type: DataTypes.FLOAT,
+      validate: {
+        min: 0,
+        max: 5
+      }
     },
-    image: {
+    thumbnail: {
       type: DataTypes.STRING
+    },
+    screenshots: {
+      type: DataTypes.ARRAY(DataTypes.STRING)
+    },
+    source: {
+      type: DataTypes.ENUM("API", "ID"),
+      allowNull: false,
     }
   },
   {
