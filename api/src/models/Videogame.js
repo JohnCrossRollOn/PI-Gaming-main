@@ -5,11 +5,10 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('videogame', {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey:true,
-      autoIncrement: true,
-      allowNull: false,
-      unique: true
+      allowNull: false
     },
     name: {
       type: DataTypes.STRING,
@@ -30,16 +29,16 @@ module.exports = (sequelize) => {
         max: 5
       }
     },
+    platforms: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: false
+    },
     thumbnail: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
-    screenshots: {
-      type: DataTypes.ARRAY(DataTypes.STRING)
-    },
-    source: {
-      type: DataTypes.ENUM("API", "ID"),
-      allowNull: false,
-    }
+    // screenshots: {
+    //   type: DataTypes.ARRAY(DataTypes.STRING)
+    // },
   },
   {
     timestamps: false

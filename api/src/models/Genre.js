@@ -11,11 +11,6 @@ module.exports = (sequelize) => {
         name: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        source: {
-            type: DataTypes.ENUM("API", "ID"),
-            allowNull: false,
-            // primaryKey: true
         }
     },{
         timestamps: false
