@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getGames } = require('../controllers/videogame.js');
+const { getGames, getGenres } = require('../controllers/videogame.js');
 
 // //populate genres
 // rawg.get('/genres')
@@ -46,6 +46,7 @@ const { getGames } = require('../controllers/videogame.js');
 
 const videogames = Router();
 
-videogames.get('/', getGames)
+videogames.get('/', getGames);
+videogames.get('/genres', getGenres);
 
 module.exports = videogames;
