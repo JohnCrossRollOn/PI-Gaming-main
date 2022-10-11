@@ -1,22 +1,24 @@
 const axios = require('axios');
 require('dotenv').config();
 const { KEY } = process.env;
-const {Videogame, Videogenre, Genre} = require('./db.js');
-const { Op } = require('sequelize');
+const { Videogame, Videogenre, Genre } = require('./db.js');
 
 const Api = axios.create({
     baseURL: 'https://api.rawg.io/api/',
     params: {
         key: KEY,
-        page_size: 100
+        page_size: 40,
     }
 });
-const addApiToDB = async () => {
+
+const addApiGenresToDB = async () => {
     const apiGenres = (await Api.get('/genres')).data.results
     .map(({id, name})=>{return {id, name}});
     await Genre.bulkCreate(apiGenres)
+}
 
-    const apiGames = (await Api.get('/games')).data.results;
+const addApiGamesToDB = async (page) => {
+    const apiGames = (await Api.get('/games', {params: {page: page}})).data.results;
     for (let apiGame of apiGames) {
         const {id, name, genres, released, rating, parent_platforms, background_image} = apiGame;
         const game = {
@@ -36,4 +38,4 @@ const addApiToDB = async () => {
     }
 };
 
-module.exports = {Api, addApiToDB};
+module.exports = {addApiGenresToDB, addApiGamesToDB};
