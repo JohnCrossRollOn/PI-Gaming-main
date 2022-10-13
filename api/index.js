@@ -23,7 +23,7 @@ const { addApiGenresToDB, addApiGamesToDB } = require('./src/api.js');
 const PORT = 3001;
 // Syncing all the models at once.
 conn.sync({ force: true })
-.then(addApiGenresToDB)
+.then(addApiGenresToDB(1))
 .then(addApiGamesToDB(1))
 .then(addApiGamesToDB(2))
 .then(addApiGamesToDB(3))

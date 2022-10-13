@@ -5,13 +5,13 @@ const getGames = async (req, res) => {
     try {
         const {name} = req.query;
         const where = name?{name: {[Op.iLike]: `%${name}%`}}:null;
-        const games = await Videogame.findAll({
+        let games = await Videogame.findAll({
             where,
             include: {
                 model: Genre, 
                 attributes: ['name', 'id']
             }, 
-            attributes: ['name', 'thumbnail', 'id']
+            attributes: ['name', 'thumbnail', 'id', 'source', 'rating']
         });
         res.json(games);
     } catch(e) {

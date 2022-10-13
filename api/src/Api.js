@@ -11,8 +11,8 @@ const Api = axios.create({
     }
 });
 
-const addApiGenresToDB = async () => {
-    const apiGenres = (await Api.get('/genres')).data.results
+const addApiGenresToDB = async (page) => {
+    const apiGenres = (await Api.get('/genres', {params: {page: page}})).data.results
     .map(({id, name})=>{return {id, name}});
     await Genre.bulkCreate(apiGenres)
 }
@@ -20,15 +20,15 @@ const addApiGenresToDB = async () => {
 const addApiGamesToDB = async (page) => {
     const apiGames = (await Api.get('/games', {params: {page: page}})).data.results;
     for (let apiGame of apiGames) {
-        const {id, name, genres, released, rating, parent_platforms, background_image} = apiGame;
+        const {name, genres, released, rating, parent_platforms, background_image} = apiGame;
         const game = {
-            id: id,
             name: name,
             description: name,
             launch_date: released,
             rating: rating,
             platforms: parent_platforms.map(platform=>platform.platform.name),
             thumbnail: background_image,
+            source: 'api'
         };
         const dbGame = await Videogame.create(game);
 
