@@ -5,9 +5,13 @@ const NavBar = (props) =>{
 
     return <div>
       <strong>IGDB</strong>
-            <NavLink to="/home">
+            <NavLink to="/">
               <button>Home</button>
             </NavLink>
+            <NavLink to="/videogames">
+              <button>Videogames</button>
+            </NavLink>
+            <button>Genres</button>
             <button>AddGame</button>
         <hr/>
     </div>

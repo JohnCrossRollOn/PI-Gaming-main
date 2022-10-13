@@ -12,7 +12,6 @@ const GameDetail = ()=>{
     },[dispatch, id])
     const game = useSelector(state=> state.game);
     const { name, description, launch_date, platforms, thumbnail, rating, genres } = game?game:{};
-    console.log(game)
         
     return game!==null?<div style={{display:'flex', justifyContent: "space-evenly"}}>
         <div>

@@ -1,5 +1,5 @@
 import React,{ useEffect, useState, useCallback } from "react";
-import { searchGames } from "../global/actions";
+import { getGames, setPage } from "../global/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const GamesSettings = (props)=>{
@@ -7,11 +7,14 @@ const GamesSettings = (props)=>{
     const [allowSearch, setAllowSearch] = useState(false);
     const dispatch = useDispatch();
     const games = useSelector(state=>state.games.length)
-    const {page, setPage} = props;
+    const { page } = useSelector(state=>state)
     
     const Search = useCallback(()=>{
-        if (allowSearch) dispatch(searchGames(searchInput))
-        setPage(0);
+        console.log('usecallback buscar')
+        if (allowSearch) {
+            dispatch(setPage(0));
+            dispatch(getGames(searchInput));
+        }
     },[allowSearch, dispatch, searchInput, setPage])
 
     useEffect(() => {
@@ -31,9 +34,6 @@ const GamesSettings = (props)=>{
         Search();
     }
 
-    const nextPage = ()=>{setPage(page=>page-1)};
-    const prevPage = ()=>{setPage(page=>page+1)};
-
     return <div>
         <input autoFocus 
         onKeyDown={event=>event.key==='Enter'?SearchAndStay():null} 
@@ -47,16 +47,17 @@ const GamesSettings = (props)=>{
         id="search" 
         placeholder="Search your game"/>
         <button onClick={()=>SearchAndStay('button')}>Search</button>
+        <button onClick={ClearAndSearch}>Clear Search Query</button>
         <hr/>
         {games>0?
         <>
-            {page>=1?<button onClick={nextPage}>Anterior</button>:null}
+            {page>=1?<button onClick={()=>dispatch(setPage(false))}>Anterior</button>:null}
             <span>  {page+1} de {Math.ceil(games/15)}  </span>
-            {page<Math.floor(games/15)?<button onClick={prevPage}>siguiente</button>:null}
+            {page<Math.floor(games/15)?<button onClick={()=>dispatch(setPage(true))}>siguiente</button>:null}
         </>
         :<>
             <span>No Results</span>
-            <button onClick={ClearAndSearch}>Clear Search Query</button>
+            
         </>}
         <hr/>
     </div>

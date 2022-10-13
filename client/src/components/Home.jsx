@@ -1,13 +1,16 @@
-import React, { useState } from "react";
-import Games from "./Games";
-import GamesSettings from "./GamesSettings";
+import React from "react";
+import { Link } from "react-router-dom";
+import { Welcome } from '../styles/PagInicial.module.css'
 
-const Home = (props) => {
-    const [page, setPage] = useState(0);
-    return <>
-        <GamesSettings setPage={setPage} page={page}/>
-        <Games filters={"filters"} page={page}/>
-    </>
+const Home = (props)=>{
+    return <div className={Welcome}>
+        <p>Proyecto Individual IGDB</p>
+        <Link to={"/videogames"}>
+            <button>
+                Buscar Jueguitos
+            </button>
+        </Link>
+    </div>
 };
 
 export default Home;
