@@ -1,0 +1,28 @@
+@keyframes appear{
+    0%{
+        opacity: 0;
+        transform: translatey(-2rem);
+    }
+    89%{
+        transform: translatey(5px);
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.GameCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: space;
+    align-items: center;
+    position: relative;
+    margin: 10px;
+    border-radius: 5px;
+    animation-name: appear;
+    animation-duration: 0.5s;
+}
+
+.GameCard:hover{
+    background-color: gray;
+}

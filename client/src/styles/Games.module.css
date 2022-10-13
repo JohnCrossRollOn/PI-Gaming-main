@@ -1,0 +1,7 @@
+.GamesContainer{
+    margin:10px;
+}
+.Games{
+    display: flex;
+    flex-wrap: wrap;
+}
