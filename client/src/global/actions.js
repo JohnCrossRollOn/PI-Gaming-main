@@ -4,8 +4,10 @@ export const GET_GAMES = "GET_GAMES";
 export const GET_GAME_DETAIL = "GET_GAME_DETAIL";
 export const GET_GENRES = "GET_GENRES";
 
+const apiUrl = `http://localhost:3001`;
+
 export const Api = async(url, parameter={})=>{
-    const response = await fetch(`http://localhost:3001/${url}`, parameter)
+    const response = await fetch(`${apiUrl}/${url}`, parameter)
     return response.json()
 }
 

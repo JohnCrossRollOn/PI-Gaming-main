@@ -23,6 +23,7 @@
     animation-duration: 0.5s;
 }
 
-.GameCard:hover{
-    background-color: gray;
+.GameCard img{
+    width: 20rem;
+    height: auto;
 }

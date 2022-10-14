@@ -6,8 +6,8 @@ module.exports = (sequelize) => {
   sequelize.define('videogame', {
     id: {
       primaryKey: true,
-      type: DataTypes.INTEGER,
-      autoIncrement: true
+      type: DataTypes.STRING,
+      defaultValue: DataTypes.UUIDV4
     },
     name: {
       type: DataTypes.STRING,

@@ -17,20 +17,20 @@ const toCard = ({name, id, genres, rating, background_image})=>{
         rating: rating,
         thumbnail: background_image,
         source: 'api',
-        genres: genres.map(({name})=>name)
+        genres: genres
     };
 };
-// name, description, launch_date, platforms, thumbnail, rating, genres
+
 const toDetail = ({name, description_raw, released, platforms, background_image, rating, genres}) => {
     const game =  {
         name: name,
         rating: rating,
         launch_date: released,
         description: description_raw,
-        platforms: platforms.map(platform=>platform.platform.name),
+        platforms: platforms.map(platform=>platform.platform),
         thumbnail: background_image,
-        source: 'api',
-        genres: genres.map(genre=>genre.name)
+        genres: genres,
+        source: 'api'
     };
     return game;
 };
