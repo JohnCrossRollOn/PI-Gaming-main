@@ -4,9 +4,10 @@ import { NavLink } from "react-router-dom";
 const NavBar = (props) =>{
 
     return <div>
-      <strong>IGDB</strong>
             <NavLink to="/">
-              <button>Home</button>
+              <button>
+                <strong>IGDB</strong>
+              </button>
             </NavLink>
             <NavLink to="/videogames">
               <button>Videogames</button>

@@ -22,7 +22,7 @@ const GameDetail = ()=>{
         </div>
         <div style={{display: "flex", flexDirection:"column"}}>
             <img style={{width:"500px", height: "500px"}}src={thumbnail} alt="una fotito del jueguito"/>
-            <strong>{genres.map(genre=>genre.name).join(', ')}</strong>
+            <strong>{genres.join(', ')}</strong>
         </div>
     </div>:<p>Todo mal, mala URL, osea 404 NotFaun</p>
 }

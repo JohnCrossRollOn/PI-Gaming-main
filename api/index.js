@@ -19,15 +19,11 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
-const { addApiGenresToDB, addApiGamesToDB } = require('./src/api.js');
+const { addApiGenresToDB } = require('./src/api.js');
 const PORT = 3001;
 // Syncing all the models at once.
 conn.sync({ force: true })
 .then(addApiGenresToDB(1))
-.then(addApiGamesToDB(1))
-.then(addApiGamesToDB(2))
-.then(addApiGamesToDB(3))
-.then(addApiGamesToDB(4))
 .then(() => {
   server.listen(PORT, () => {
     console.log(`listening at ${PORT}`); // eslint-disable-line no-console

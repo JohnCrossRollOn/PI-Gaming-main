@@ -1,9 +1,9 @@
 const { Router } = require('express');
-const { getGames, getGameDetail, postGames } = require('../controllers/videogamesController.js');
+const { getGames, getGame, postGames } = require('../controllers/videogamesController.js');
 
 const videogames = Router();
 
-videogames.get('/:id', getGameDetail);
+videogames.get('/:id', getGame);
 videogames.get('/', getGames);
 
 videogames.post('/', postGames)

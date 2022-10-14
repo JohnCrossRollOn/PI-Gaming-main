@@ -51,9 +51,9 @@ const GamesSettings = (props)=>{
         <hr/>
         {games>0?
         <>
-            {page>=1?<button onClick={()=>dispatch(setPage(false))}>Anterior</button>:null}
+            {page>=1?<button onClick={()=>dispatch(setPage(false))}>{'<<<'}</button>:null}
             <span>  {page+1} de {Math.ceil(games/15)}  </span>
-            {page<Math.floor(games/15)?<button onClick={()=>dispatch(setPage(true))}>siguiente</button>:null}
+            {page+1<Math.ceil(games/15)?<button onClick={()=>dispatch(setPage(true))}>{'>>>'}</button>:null}
         </>
         :<>
             <span>No Results</span>
