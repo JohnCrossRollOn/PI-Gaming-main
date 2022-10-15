@@ -12,7 +12,13 @@
 }
 
 .GameCard{
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
     display: flex;
+    flex-wrap: wrap;
+    width: 22rem;
+    height: 14rem;
     flex-direction: column;
     justify-content: space;
     align-items: center;
@@ -24,6 +30,7 @@
 }
 
 .GameCard img{
+    object-fit: cover;
     width: 20rem;
-    height: auto;
+    height: 10rem;
 }

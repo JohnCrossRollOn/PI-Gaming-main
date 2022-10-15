@@ -1,21 +1,28 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setPage, getGames } from "../global/actions";
 
-const NavBar = (props) =>{
-
-    return <div>
-            <NavLink to="/">
-              <button>
-                <strong>IGDB</strong>
-              </button>
-            </NavLink>
-            <NavLink to="/videogames">
-              <button>Videogames</button>
-            </NavLink>
-            <button>Genres</button>
-            <button>AddGame</button>
-        <hr/>
-    </div>
+const NavBar = () =>{
+  const dispatch = useDispatch();
+  const { pathname } = useLocation();
+  const videogamesInsist = ()=>{
+    dispatch(setPage(0));
+    return pathname==='/videogames'?dispatch(getGames()):null
+  };
+  return <div>
+          <NavLink to="/">
+            <button>
+              <strong>IGDB</strong>
+            </button>
+          </NavLink>
+          <NavLink to="/videogames">
+            <button onClick={videogamesInsist}>Videogames</button>
+          </NavLink>
+          <button>Genres</button>
+          <button>AddGame</button>
+      <hr/>
+  </div>
 }
 
 export default NavBar;

@@ -38,7 +38,6 @@ const getGame = async (req, res, next) => {
         if (dbGame) {
             res.json(dbGame)
         } else {
-            console.log(dbGame)
             const apiGame = await getApiGame(id);
             res.json(apiGame)
         }

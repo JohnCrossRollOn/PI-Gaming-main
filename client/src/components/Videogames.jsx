@@ -1,17 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import GameCards from "./GameCards";
-import GamesSettings from "./GamesSettings";
-import { useDispatch } from "react-redux";
-import { getGames } from '../global/actions';
+import Pagination from './Pagination';
+import VideoOptions from "./VideoOptions";
 
 const Videogames = (props) => {
-const dispatch = useDispatch();
-  useEffect( ()=>{
-    dispatch(getGames())
-  }, [dispatch]);
     return <>
-        <GamesSettings/>
+        <VideoOptions/>
+        <hr/>
         <GameCards/>
+        <hr/>
+        <Pagination/>
     </>
 };
 

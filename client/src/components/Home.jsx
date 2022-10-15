@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Welcome } from '../styles/PagInicial.module.css'
 
-const Home = (props)=>{
+const Home = ()=>{
     return <div className={Welcome}>
         <p>Proyecto Individual IGDB</p>
         <Link to={"/videogames"}>

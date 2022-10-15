@@ -4,12 +4,18 @@ import React from 'react';
 import Videogames from './components/Videogames';
 import NavigationBar from './components/NavBar';
 import GameDetail from './components/GameDetail';
-import Home from './components/Home.jsx'
+import Home from './components/Home';
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getGames } from './global/actions';
 
+const App = () => {
+  const dispatch = useDispatch();
+  useEffect( ()=>{dispatch(getGames())}, [dispatch]);
 
-const App = () => <div className="App">
+  return <div className="App">
     <Switch>
-      <Route exact path="/"><Home/></Route>
+      <Route exact path="/"component={Home}/>
       <Route path="/">
         <Route path="/" component={NavigationBar}/>
         <Switch>
@@ -18,6 +24,7 @@ const App = () => <div className="App">
         </Switch>
       </Route>
     </Switch>
-    </div>;
+  </div>
+}
 
 export default App;

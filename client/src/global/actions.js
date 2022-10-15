@@ -32,7 +32,9 @@ export const getGenres = ()=>dispatch=>{
 //SYNC
 
 export const SET_PAGE = "SET_PAGE";
+export const SET_SEARCHBAR = "SET_SEARCHBAR"
 
-export const setPage = (page)=>dispatch=>{
-    return dispatch({type: SET_PAGE, payload:page})
-}
+export const setPage = (page)=>dispatch=>dispatch({type: SET_PAGE, payload:page});
+
+export const setSearchBar = (input, query)=>dispatch=>dispatch({type: SET_SEARCHBAR, payload: {input, query}})
+

@@ -6,13 +6,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './global/store.js'
+import ScrollToTopWithRouter from './components/ScrollToTopWithRouter.jsx'
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      <ScrollToTopWithRouter>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </ScrollToTopWithRouter>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
