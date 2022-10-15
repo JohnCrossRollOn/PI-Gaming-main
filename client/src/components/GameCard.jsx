@@ -4,12 +4,11 @@ import Style from "../styles/GameCard.module.css"
 
 const GameCard = ({game})=>{
     return<Link to={`/videogame/${game.id}`} className={Style.GameCard}>
-            <button>
-            <div>
+            <button className={Style.GameButton}>
+            <div className={Style.GameDiv1}>
                 <img src={game.thumbnail} alt="Probably a game, idk"/>
-                <hr/>
             </div>
-            <div>
+            <div className={Style.GameDiv2}>
                 <strong>{game.name}</strong>
                 <p>{game.genres.map(({name})=>name).join(', ')}</p>
             </div>

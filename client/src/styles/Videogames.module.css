@@ -1,0 +1,13 @@
+.Videogames{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.VideoOptions {
+    width: 20rem
+}
+
+.Page {
+    width: fit-content;
+}

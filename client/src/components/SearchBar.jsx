@@ -63,11 +63,9 @@ const SearchBar = (props)=>{
         type="text" 
         name="search" 
         id="search" 
-        placeholder={placeHolder}/>
+        placeholder={placeHolder}></input>
         {hasSearchButton?<button onClick={enterSearch}>Search</button>:
         hasClearButton?<button onClick={clear}>x</button>:null}
-        {/* {hasClearButton && <button onClick={clear}>x</button>}
-        {hasSearchButton && <button onClick={enterSearch}>Search</button>} */}
     </div>
 };
 

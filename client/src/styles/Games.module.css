@@ -1,7 +1,9 @@
 .GamesContainer{
-    margin:10px;
+    display: flex;
+    margin: auto;
 }
 .Games{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }

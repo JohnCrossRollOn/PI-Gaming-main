@@ -3,34 +3,44 @@
         opacity: 0;
         transform: translatey(-2rem);
     }
-    89%{
-        transform: translatey(5px);
-    }
     100%{
         opacity: 1;
     }
 }
 
-.GameCard{
+.GameCard {
+    animation-name: appear;
+    animation-duration: 0.5s;
+    width: 20rem;
+    height: 14rem;
+    margin: 0.5rem
+}
+
+.GameButton {
+    margin: 0;
+    padding: 0;
+    border: 1px solid gray;
+    border-radius: 1rem;
+    width: 20rem;
+    height: 14rem;
+}
+
+.GameDiv1 {
+    width: 20rem;
+    height: 12rem;
+}
+
+.GameDiv1 img{
+    object-fit: fill;
+    width: 20rem;
+    height: 12rem;
+    border-radius: 1rem;
+}
+
+.GameDiv2 {
+    width: 20rem;
+    height: 2rem;
     overflow: hidden;
     white-space:nowrap;
     text-overflow: ellipsis;
-    display: flex;
-    flex-wrap: wrap;
-    width: 22rem;
-    height: 14rem;
-    flex-direction: column;
-    justify-content: space;
-    align-items: center;
-    position: relative;
-    margin: 10px;
-    border-radius: 5px;
-    animation-name: appear;
-    animation-duration: 0.5s;
-}
-
-.GameCard img{
-    object-fit: cover;
-    width: 20rem;
-    height: 10rem;
 }
