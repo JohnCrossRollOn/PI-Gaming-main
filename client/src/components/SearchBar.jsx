@@ -13,13 +13,7 @@ const SearchBar = (props)=>{
         input: ''
     })
     const save = ()=>dispatch(saveSearchBar(SearchBar));
-    
-    const search = useCallback(()=>{
-        dispatch(setPage(0));
-        dispatch(getGames(SearchBar.input));
-        save();
-    },[dispatch, SearchBar])
-    
+
     const blank = ()=>{
         dispatch(getGames());
         setSearchBar(bar=>({...bar, state:'blank', input:'', query: placeholder}))
@@ -32,24 +26,24 @@ const SearchBar = (props)=>{
         'blank'), 
         input:target.value}))
     };
-    const entered = ()=>{
+    const entered = (param)=>{
         dispatch(setPage(0));
         dispatch(getGames(SearchBar.input));
         save();
-        setSearchBar(bar=>({...bar, state:'entered', query: bar.input, input: ''}))
+        setSearchBar(bar=>({...bar, state:'entered', query: bar.input, input: param?bar.input:''}))
     };
 
     useEffect(() => {
-        const delayedSearch = setTimeout(()=>SearchBar.state!=='entered'&&SearchBar.input!==''?search():null, 1000)
+        const delayedSearch = setTimeout(()=>SearchBar.state!=='entered'&&SearchBar.input!==''?entered(1):null, 1000)
         return () => {
             clearTimeout(delayedSearch);
             save();
         }
-    }, [search, dispatch])
+    }, [entered, dispatch])
 
     return <div>
         <input autoFocus 
-        onKeyDown={event=>event.key==='Enter'&&SearchBar.input!==''?entered():null} 
+        onKeyDown={event=>event.key==='Enter'&&SearchBar.input!==''?entered():event.key==='Escape'?blank():null} 
         value={SearchBar.input} 
         onChange={event=>typing(event)} 
         type="text" 
