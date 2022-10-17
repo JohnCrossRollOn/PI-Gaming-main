@@ -1,11 +1,13 @@
 import React from "react";
 import SearchBar from "./SearchBar";
+import SortBar from "./SortBar";
 
 const VideoOptions = ()=>{
 
     return <div>
         <SearchBar/>
-        <button onClick={()=>console.log('hiciste click para ordenar!')}>Ordenar</button>
+        <SortBar settings={['A-Z⬇', 'A_Z⬆']}/>
+        <SortBar settings={['Rating⬆', 'Rating⬇']}/>
     </div>
 };
 

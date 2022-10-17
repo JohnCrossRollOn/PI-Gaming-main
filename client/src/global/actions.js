@@ -1,7 +1,7 @@
 //ASYNC
 
 export const GET_GAMES = "GET_GAMES";
-export const GET_GAME_DETAIL = "GET_GAME_DETAIL";
+export const GET_GAMEDETAIL = "GET_GAME_DETAIL";
 export const GET_GENRES = "GET_GENRES";
 
 const apiUrl = `http://localhost:3001`;
@@ -20,7 +20,7 @@ export const getGames = (name)=>dispatch=>{
 export const getGameDetail = (id)=>dispatch=>{
 
     return Api(`videogames/${id}`)
-    .then(data=>dispatch({type: GET_GAME_DETAIL, payload: data}))
+    .then(data=>dispatch({type: GET_GAMEDETAIL, payload: data}))
 }
 
 export const getGenres = ()=>dispatch=>{
@@ -32,9 +32,15 @@ export const getGenres = ()=>dispatch=>{
 //SYNC
 
 export const SET_PAGE = "SET_PAGE";
-export const SAVE_SEARCHBAR = "SAVE_SEARCHBAR"
+export const SAVE_SEARCHBAR = "SAVE_SEARCHBAR";
+export const SAVE_SORTBAR = "SAVE_SORTBAR";
+export const SKELE_GAMEDETAIL = "SKELE_GAMEDETAIL";
 
 export const setPage = (page)=>dispatch=>dispatch({type: SET_PAGE, payload:page});
 
 export const saveSearchBar = (searchbar)=>dispatch=>dispatch({type: SAVE_SEARCHBAR, payload: searchbar})
+
+export const saveSortBar = (sortbar)=>dispatch=>dispatch({type: SAVE_SORTBAR, payload: sortbar})
+
+export const skeleGameDetail = ()=>dispatch=>dispatch({type: SKELE_GAMEDETAIL});
 

@@ -50,8 +50,8 @@ const SearchBar = (props)=>{
         name="search" 
         id="search" 
         placeholder={SearchBar.query}></input>
-        {SearchBar.state==='typing'?<button onClick={entered}>Search</button>:
-        SearchBar.state==='entered'?<button onClick={blank}>x</button>:null}
+        {SearchBar.state==='typing'?<button onClick={entered}>🔎</button>:
+        SearchBar.state==='entered'?<button onClick={blank}>❌</button>:null}
     </div>
 };
 
