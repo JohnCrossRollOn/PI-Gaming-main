@@ -12,7 +12,7 @@ export const Api = async(url, parameter={})=>{
 }
 
 export const getGames = (name)=>dispatch=>{
-
+    console.log(name?`se busco${name}`:'se busco todo')
     return Api(`videogames${name?`?name=${name}`:''}`)
     .then(data=>dispatch({type: GET_GAMES, payload: data}))
 }
@@ -32,9 +32,9 @@ export const getGenres = ()=>dispatch=>{
 //SYNC
 
 export const SET_PAGE = "SET_PAGE";
-export const SET_SEARCHBAR = "SET_SEARCHBAR"
+export const SAVE_SEARCHBAR = "SAVE_SEARCHBAR"
 
 export const setPage = (page)=>dispatch=>dispatch({type: SET_PAGE, payload:page});
 
-export const setSearchBar = (input, query)=>dispatch=>dispatch({type: SET_SEARCHBAR, payload: {input, query}})
+export const saveSearchBar = (searchbar)=>dispatch=>dispatch({type: SAVE_SEARCHBAR, payload: searchbar})
 

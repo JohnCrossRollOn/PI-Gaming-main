@@ -6,7 +6,8 @@ const GameCard = ({game})=>{
     return<Link to={`/videogame/${game.id}`} className={Style.GameCard}>
             <button className={Style.GameButton}>
             <div className={Style.GameDiv1}>
-                <img src={game.thumbnail} alt="Probably a game, idk"/>
+                <img 
+                loading="lazy" decoding="async" src={game.thumbnail} alt="Probably a game, idk"/>
             </div>
             <div className={Style.GameDiv2}>
                 <strong>{game.name}</strong>

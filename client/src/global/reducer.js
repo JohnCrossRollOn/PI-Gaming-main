@@ -3,7 +3,7 @@ import {
     GET_GAME_DETAIL,
     GET_GENRES,
     SET_PAGE,
-    SET_SEARCHBAR
+    SAVE_SEARCHBAR
 } from "./actions.js";
 
 const initialState = {
@@ -14,7 +14,8 @@ const initialState = {
     game: null,
     searchbar: {
         input: '',
-        query: ''
+        query: '',
+        state: ''
     },
     page: 0
 };
@@ -32,7 +33,7 @@ const rootReducer = (state = initialState, action) => {
             action.payload:
             action.payload?
             state.page+1:state.page-1}
-        case SET_SEARCHBAR:
+        case SAVE_SEARCHBAR:
             return {...state, searchbar: action.payload}
         default:
             return {...state}

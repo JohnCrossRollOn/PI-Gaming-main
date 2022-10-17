@@ -1,71 +1,63 @@
 import React,{ useEffect, useState, useCallback } from "react";
-import { getGames, setPage, setSearchBar } from "../global/actions";
+import { getGames, setPage, saveSearchBar } from "../global/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const SearchBar = (props)=>{
-    const defaultPlaceHolder = 'search game';
-    
-    const {input, query} = useSelector(state=>state.searchbar)
-    const [searchInput, setSearchInput] = useState(input.length>0?input: '');
-    const [placeHolder, setPlaceHolder] = useState(query.length>0?query:defaultPlaceHolder);
-    const [allowSearch, setAllowSearch] = useState(false);
-    const [hasClearButton, setClearButton] = useState(query.length>0);
-    const [hasSearchButton, setSearchButton] = useState(false);
-
+    const placeholder = 'search game';
+    const savedSearchBar = useSelector(state=>state.searchbar);
     const dispatch = useDispatch();
-    const dispatchSearchBar = (input, query) => dispatch(setSearchBar(input, placeHolder===defaultPlaceHolder?'':query));
-
+    
+    const [SearchBar, setSearchBar] = useState(savedSearchBar.state!==''?savedSearchBar:{
+        state: 'blank',
+        query: placeholder,
+        input: ''
+    })
+    const save = ()=>dispatch(saveSearchBar(SearchBar));
+    
     const search = useCallback(()=>{
-        if (allowSearch) {
-            dispatch(setPage(0));
-            dispatch(getGames(searchInput));
-            dispatchSearchBar(searchInput, placeHolder)
-        }
-    },[allowSearch, dispatch, searchInput])
+        dispatch(setPage(0));
+        dispatch(getGames(SearchBar.input));
+        save();
+    },[dispatch, SearchBar])
+    
+    const blank = ()=>{
+        dispatch(getGames());
+        setSearchBar(bar=>({...bar, state:'blank', input:'', query: placeholder}))
+    };
+    const typing = ({target})=>{
+        setSearchBar(bar=>({
+        ...bar, 
+        state:(target.value!==''?'typing':
+        bar.query!==placeholder?'entered':
+        'blank'), 
+        input:target.value}))
+    };
+    const entered = ()=>{
+        dispatch(setPage(0));
+        dispatch(getGames(SearchBar.input));
+        save();
+        setSearchBar(bar=>({...bar, state:'entered', query: bar.input, input: ''}))
+    };
 
     useEffect(() => {
-        const delayedSearch = setTimeout(search, 1000)
+        const delayedSearch = setTimeout(()=>SearchBar.state!=='entered'&&SearchBar.input!==''?search():null, 1000)
         return () => {
             clearTimeout(delayedSearch);
-            dispatchSearchBar(searchInput, placeHolder);
+            save();
         }
-    }, [searchInput, search, dispatch])
-
-    const enterSearch = () => {
-        if (searchInput.length>0){
-            setPlaceHolder(searchInput);
-            allowSearch?setAllowSearch(false):setAllowSearch(true);
-            search();
-            setSearchInput('');
-            setClearButton(true);
-            setSearchButton(false)
-        }
-    };
-    
-    const clear = ()=>{
-        setSearchInput('');
-        setPlaceHolder('search game');
-        setAllowSearch(true);
-        setClearButton(false);
-        setSearchButton(false);
-        search()
-    }
+    }, [search, dispatch])
 
     return <div>
         <input autoFocus 
-        onKeyDown={event=>event.key==='Enter'?enterSearch():null} 
-        value={searchInput} 
-        onChange={(event)=>{
-            setSearchInput(event.target.value);
-            setSearchButton(event.target.value!=='');
-            setAllowSearch(true)
-        }} 
+        onKeyDown={event=>event.key==='Enter'&&SearchBar.input!==''?entered():null} 
+        value={SearchBar.input} 
+        onChange={event=>typing(event)} 
         type="text" 
         name="search" 
         id="search" 
-        placeholder={placeHolder}></input>
-        {hasSearchButton?<button onClick={enterSearch}>Search</button>:
-        hasClearButton?<button onClick={clear}>x</button>:null}
+        placeholder={SearchBar.query}></input>
+        {SearchBar.state==='typing'?<button onClick={entered}>Search</button>:
+        SearchBar.state==='entered'?<button onClick={blank}>x</button>:null}
     </div>
 };
 

@@ -7,11 +7,14 @@ import GameDetail from './components/GameDetail';
 import Home from './components/Home';
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getGames } from './global/actions';
+import { getGames, getGenres } from './global/actions';
 
 const App = () => {
   const dispatch = useDispatch();
-  useEffect( ()=>{dispatch(getGames())}, [dispatch]);
+  useEffect( ()=>{
+    dispatch(getGames());
+    dispatch(getGenres())
+  }, [dispatch]);
 
   return <div className="App">
     <Switch>
