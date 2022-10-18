@@ -2,6 +2,17 @@ const { Videogame , Genre, Videogenre } = require('../db.js');
 const { Op } = require('sequelize');
 const { getApiGames, searchApiGames, getApiGame } = require('../Api.js');
 
+const toCard = ({id, name, rating, thumbnail, source, genres})=>{
+    return {
+        id,
+        name,
+        rating,
+        thumbnail,
+        source,
+        genres: genres.map(genre=>genre.name)
+    };
+};
+
 const getGames = async (req, res, next) => {
     try {
         const {name} = req.query;
@@ -15,10 +26,12 @@ const getGames = async (req, res, next) => {
             attributes: ['name', 'thumbnail', 'id', 'source', 'rating'],
             limit: name?15:null
         });
+        const getManyApiGames = async()=>{
+            return [...await getApiGames(),...await getApiGames(2),...await getApiGames(3),]
+        }
+        const apiGames = name?await searchApiGames(name):await getManyApiGames();
 
-        const apiGames = name?await searchApiGames(name):await getApiGames();
-
-        res.json([...dbGames, ...apiGames]);
+        res.json([...dbGames.map(game=>({...game, genres:game.genres.map(genre=>genre.name)})), ...apiGames]);
     } catch(e) {
         next(e)
     }

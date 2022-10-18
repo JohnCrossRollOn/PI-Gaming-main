@@ -15,7 +15,7 @@ const GameCard = ({game})=>{
             </div>
             <div className={Style.GameDiv2}>
                 <strong>{game.name}</strong>
-                <p>{game.genres.map(({name})=>name).join(', ')}</p>
+                <p>{game.genres.join(', ')}</p>
             </div>
             </button>
         </Link>

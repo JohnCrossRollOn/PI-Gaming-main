@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveSortBar } from "../global/actions";
 
-const SortBar = ({settings})=>{
+const SortBar = ({options})=>{
     const dispatch = useDispatch();
     const saved = useSelector(state=>state.sortbar);
 
-    const [sortBar, setSort] = useState(saved);
-
     return <div>
-        {settings.map(setting=>{
+        {options.map(setting=>{
         const isActive = setting===saved;
         return <button 
         onClick={()=>dispatch(saveSortBar(isActive?'':setting))} 

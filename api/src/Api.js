@@ -17,7 +17,7 @@ const toCard = ({name, id, genres, rating, background_image})=>{
         rating: rating,
         thumbnail: background_image,
         source: 'api',
-        genres: genres
+        genres: genres.map(genre=>genre.name)
     };
 };
 

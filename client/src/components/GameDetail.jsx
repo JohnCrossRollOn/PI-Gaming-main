@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getGameDetail, skeleGameDetail } from "../global/actions";
+import { getGameDetail, skeleGame } from "../global/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import Style from "../styles/GameDetail.module.css"
@@ -8,7 +8,7 @@ const GameDetail = ()=>{
     const {id} = useParams();
     const dispatch = useDispatch()
     useEffect(()=>{
-        dispatch(skeleGameDetail());
+        dispatch(skeleGame());
         dispatch(getGameDetail(id))
     },[dispatch, id])
 
@@ -17,10 +17,10 @@ const GameDetail = ()=>{
     return <div>
         {
         game!==null?<>
-            <Link to="/videogames">para atras</Link>
+            <Link to="/videogames"><span>Go Back↩</span></Link>
             <hr/>
             <div className={Style.Page}>
-            <div>
+            <div className={Style.Data}>
                 <h2>{`${launch_date.split('-')[0]}, ${name}`}</h2>
                 <p>{`Rating: ${rating}`}</p>
                 <br/>
@@ -28,7 +28,7 @@ const GameDetail = ()=>{
                 <br/>
                 <strong>{platforms.map(({name})=>name).join(', ')}</strong>
             </div>
-            <div style={{display: "flex", flexDirection:"column"}}>
+            <div className={Style.imageContainer}>
                 <img className={Style.image} src={thumbnail} alt="una fotito del jueguito"/>
                 <strong>{genres.map(({name})=>name).join(', ')}</strong>
             </div>

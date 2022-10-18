@@ -12,7 +12,10 @@ const SearchBar = (props)=>{
         query: placeholder,
         input: ''
     })
-    const save = ()=>dispatch(saveSearchBar(SearchBar));
+    const save = 
+    // useCallback(
+        ()=>dispatch(saveSearchBar(SearchBar))
+        // , [dispatch, SearchBar]);
 
     const blank = ()=>{
         dispatch(getGames());
@@ -26,12 +29,15 @@ const SearchBar = (props)=>{
         'blank'), 
         input:target.value}))
     };
-    const entered = (param)=>{
+    const entered = 
+    // useCallback(
+        (param)=>{
         dispatch(setPage(0));
         dispatch(getGames(SearchBar.input));
         save();
         setSearchBar(bar=>({...bar, state:'entered', query: bar.input, input: param?bar.input:''}))
-    };
+    }
+    // , [dispatch, save, setSearchBar, SearchBar.input]);
 
     useEffect(() => {
         const delayedSearch = setTimeout(()=>SearchBar.state!=='entered'&&SearchBar.input!==''?entered(1):null, 1000)
@@ -39,7 +45,7 @@ const SearchBar = (props)=>{
             clearTimeout(delayedSearch);
             save();
         }
-    }, [entered, dispatch])
+    }, [])
 
     return <div>
         <input autoFocus 

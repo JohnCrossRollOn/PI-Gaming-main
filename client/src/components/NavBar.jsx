@@ -6,9 +6,9 @@ import { setPage, getGames } from "../global/actions";
 const NavBar = () =>{
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const videogamesInsist = ()=>{
+  const insist = (path, action)=>{
     dispatch(setPage(0));
-    return pathname==='/videogames'?dispatch(getGames()):null
+    return pathname===path?dispatch((action)()):null
   };
   return <div>
           <NavLink to="/">
@@ -17,7 +17,7 @@ const NavBar = () =>{
             </button>
           </NavLink>
           <NavLink to="/videogames">
-            <button onClick={videogamesInsist}>Videogames</button>
+            <button onClick={()=>insist('/videogames',getGames)}>Videogames</button>
           </NavLink>
           <button>Genres</button>
           <button>AddGame</button>

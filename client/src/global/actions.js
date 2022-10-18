@@ -33,14 +33,22 @@ export const getGenres = ()=>dispatch=>{
 
 export const SET_PAGE = "SET_PAGE";
 export const SAVE_SEARCHBAR = "SAVE_SEARCHBAR";
+export const SAVE_FILTERBAR = "SAVE_FILTERBAR";
 export const SAVE_SORTBAR = "SAVE_SORTBAR";
-export const SKELE_GAMEDETAIL = "SKELE_GAMEDETAIL";
+
 
 export const setPage = (page)=>dispatch=>dispatch({type: SET_PAGE, payload:page});
 
-export const saveSearchBar = (searchbar)=>dispatch=>dispatch({type: SAVE_SEARCHBAR, payload: searchbar})
+export const saveSearchBar = (searchbar)=>dispatch=>dispatch({type: SAVE_SEARCHBAR, payload: searchbar});
 
-export const saveSortBar = (sortbar)=>dispatch=>dispatch({type: SAVE_SORTBAR, payload: sortbar})
+export const saveFilterBar = (filterBar)=>dispatch=>dispatch({type: SAVE_FILTERBAR, payload: filterBar})
 
-export const skeleGameDetail = ()=>dispatch=>dispatch({type: SKELE_GAMEDETAIL});
+export const saveSortBar = (sortbar)=>dispatch=>dispatch({type: SAVE_SORTBAR, payload: sortbar});
+
+//UI_UX
+export const SKELE_GAME = "SKELE_GAME";
+export const SKELE_GAMES = "SKELE_GAMEDETAIL";
+
+export const skeleGames = ()=>dispatch=>dispatch({type: SKELE_GAMES});
+export const skeleGame = ()=>dispatch=>dispatch({type: SKELE_GAME});
 

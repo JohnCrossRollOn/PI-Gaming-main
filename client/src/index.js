@@ -7,17 +7,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './global/store.js'
 // import ScrollToTopWithRouter from './components/ScrollToTopWithRouter.jsx'
+import ErrorBoundary from './components/ErrorBoundary'
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      {/* <ScrollToTopWithRouter> */}
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      {/* </ScrollToTopWithRouter> */}
-    </BrowserRouter>
-  </Provider>,
+  <ErrorBoundary>
+    <Provider store={store}>
+      <BrowserRouter>
+        {/* <ScrollToTopWithRouter> */}
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        {/* </ScrollToTopWithRouter> */}
+      </BrowserRouter>
+    </Provider>
+  </ErrorBoundary>,
   document.getElementById('root')
 );
 
