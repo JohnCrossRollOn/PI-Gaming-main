@@ -13,7 +13,6 @@ const GameDetail = ()=>{
     },[dispatch, id])
 
     const game = useSelector(state=> state.game);
-    const { name, description, launch_date, platforms, thumbnail, rating, genres } = game?game:{};
     return <div>
         {
         game!==null?<>
@@ -21,16 +20,19 @@ const GameDetail = ()=>{
             <hr/>
             <div className={Style.Page}>
             <div className={Style.Data}>
-                <h2>{`${launch_date.split('-')[0]}, ${name}`}</h2>
-                <p>{`Rating: ${rating}`}</p>
+                <div style={{display: "flex", flexDirection:"row", justifyContent:"left"}}>
+                    {game.launch_date && <h2>{game.launch_date.split('-')[0]},_</h2>} 
+                    {game.name && <h2>{game.name}</h2>}
+                </div>
+                <p>{`Rating: ${game.rating}`}</p>
                 <br/>
-                <p>{description}</p>
+                <p>{game.description}</p>
                 <br/>
-                <strong>{platforms.map(({name})=>name).join(', ')}</strong>
+                {game.platforms && <strong>{game.platforms.map(({name})=>name).join(', ')}</strong>}
             </div>
             <div className={Style.imageContainer}>
-                <img className={Style.image} src={thumbnail} alt="una fotito del jueguito"/>
-                <strong>{genres.map(({name})=>name).join(', ')}</strong>
+                <img className={Style.image} src={game.thumbnail} alt="una fotito del jueguito"/>
+                <strong>{game.genres && game.genres.map(({name})=>name).join(', ')}</strong>
             </div>
         </div>
         </>

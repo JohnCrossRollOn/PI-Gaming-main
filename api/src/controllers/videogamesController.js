@@ -17,7 +17,7 @@ const getGames = async (req, res, next) => {
     try {
         const {name} = req.query;
         const where = name?{name: {[Op.iLike]: `%${name}%`}}:null;
-        let dbGames = await Videogame.findAll({
+        let dbGames =  await Videogame.findAll({
             where,
             include: {
                 model: Genre, 
@@ -31,7 +31,7 @@ const getGames = async (req, res, next) => {
         }
         const apiGames = name?await searchApiGames(name):await getManyApiGames();
 
-        res.json([...dbGames.map(game=>({...game, genres:game.genres.map(genre=>genre.name)})), ...apiGames]);
+        res.json([...dbGames.map(game=>toCard(game)), ...apiGames]);
     } catch(e) {
         next(e)
     }
