@@ -3,7 +3,7 @@ import GameCards from "./GameCards";
 import VideoOptions from "./VideoOptions";
 import Style from "../styles/Videogames.module.css"
 
-const Videogames = (props) => {
+const Videogames = () => {
     return <div className={Style.Videogames}>
         <div className={Style.VideoOptions}>
             <VideoOptions/>

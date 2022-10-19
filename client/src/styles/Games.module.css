@@ -2,7 +2,21 @@
     display: flex;
     margin: auto;
 }
+
+@keyframes appear{
+    0%{
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
 .Games{
+    animation-name: appear;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

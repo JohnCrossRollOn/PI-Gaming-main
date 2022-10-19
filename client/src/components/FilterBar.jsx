@@ -1,5 +1,5 @@
 import React from "react";
-import { saveFilterBar, setPage } from "../global/actions";
+import { saveFilterBar } from "../global/actions";
 import { useSelector, useDispatch } from "react-redux";
 
 const FilterBar = ({type, options})=>{
@@ -10,7 +10,6 @@ const FilterBar = ({type, options})=>{
         {options.map(setting=>{
         const isActive = saved.some(saved=>saved[type]===setting);
         const save = ()=>{
-            dispatch(setPage(0))
             dispatch(saveFilterBar({[type]:setting}))
         }
         return <button 

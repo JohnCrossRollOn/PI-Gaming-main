@@ -1,26 +1,31 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setPage, getGames } from "../global/actions";
+import { getGames, getGenres } from "../global/actions";
 
 const NavBar = () =>{
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const insist = (path, action)=>{
-    dispatch(setPage(0));
     return pathname===path?dispatch((action)()):null
   };
   return <div>
-          <NavLink to="/">
-            <button>
-              <strong>IGDB</strong>
-            </button>
-          </NavLink>
-          <NavLink to="/videogames">
-            <button onClick={()=>insist('/videogames',getGames)}>Videogames</button>
-          </NavLink>
-          <button>Genres</button>
-          <button>AddGame</button>
+    <nav>
+      <ul style={{display:"flex", justifyContent: "space-evenly"}}>
+        <li>
+          <NavLink to="/">Home</NavLink>
+        </li>
+        <li>
+          <NavLink to="/videogames" onClick={()=>insist('/videogames',getGames)}>Videogames</NavLink>
+        </li>
+        <li>
+          <NavLink to="/genres" onClick={()=>insist('/genres',getGenres)}>Genres</NavLink>
+        </li>
+        <li>
+          <NavLink to="/postgame" onClick={()=>insist('postgame')}>Create Game</NavLink>
+        </li>
+      </ul>
+    </nav>
       <hr/>
   </div>
 }

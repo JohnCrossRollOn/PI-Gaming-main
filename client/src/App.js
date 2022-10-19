@@ -8,6 +8,7 @@ import Home from './components/Home';
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getGames, getGenres } from './global/actions';
+import Genres from './components/Genres';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,8 @@ const App = () => {
         <Switch>
           <Route path="/videogames" component={Videogames}/>
           <Route path="/videogame/:id" component={GameDetail}/>
+          <Route path="/genres" component={Genres}/>
+          <Route path="/postgame" component={Home}/>
         </Switch>
       </Route>
     </Switch>

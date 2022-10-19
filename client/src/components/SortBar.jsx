@@ -4,16 +4,16 @@ import { saveSortBar } from "../global/actions";
 
 const SortBar = ({options})=>{
     const dispatch = useDispatch();
-    const saved = useSelector(state=>state.sortbar);
+    const saved = useSelector(state=>state.sortbar.name);
 
-    return <div>
-        {options.map(setting=>{
-        const isActive = setting===saved;
+    return <div style={{display: "flex", alignItems:"center", justifyContent:"space-evenly"}}>
+        {options.map(({setting, name})=>{
+        const isActive = name===saved;
         return <button 
-        onClick={()=>dispatch(saveSortBar(isActive?'':setting))} 
+        onClick={()=>dispatch(saveSortBar({name, setting}))} 
         key={`${setting}`}
         style={isActive?{backgroundColor: "lightgreen"}:{}}>
-            {setting}
+            {name}
         </button>
     })}
     </div>
