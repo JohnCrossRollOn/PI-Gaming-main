@@ -7,7 +7,7 @@ const CurrentFilters = ()=>{
     const filterbar = useSelector(state=>state.filterbar);
     return <>
         {filterbar.map(filter=>
-            <button style={{backgroundColor:"lightgreen"}} onClick={()=>dispatch(saveFilterBar(filter))}>{Object.entries(filter)[0][1]} &times;</button>
+            <button key={Object.entries(filter)[0][1]} style={{backgroundColor:"lightgreen"}} onClick={()=>dispatch(saveFilterBar(filter))}>{Object.entries(filter)[0][1]} &times;</button>
         )}
     </>
 }

@@ -1,0 +1,10 @@
+.container {
+    background-color: pink;
+    display: flex;
+    justify-content: center;
+}
+
+.tags {
+    background-color: purple;
+    margin-right: auto;
+}

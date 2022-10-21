@@ -1,14 +1,18 @@
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getGames, getGenres } from "../global/actions";
+import { getGames } from '../global/actions';
 
 const NavBar = () =>{
   const dispatch = useDispatch();
-  const { pathname } = useLocation();
-  const insist = (path, action)=>{
-    return pathname===path?dispatch((action)()):null
-  };
+  const get = {
+    Videogames: ()=>dispatch(getGames())
+  }
+
+  const insist = (e) => {
+    get[e.target.innerText]()
+  }
+
   return <div>
     <nav>
       <ul style={{display:"flex", justifyContent: "space-evenly"}}>
@@ -16,13 +20,16 @@ const NavBar = () =>{
           <NavLink to="/">Home</NavLink>
         </li>
         <li>
-          <NavLink to="/videogames" onClick={()=>insist('/videogames',getGames)}>Videogames</NavLink>
+          <NavLink to="/videogames" onClick={insist}>Videogames</NavLink>
         </li>
         <li>
-          <NavLink to="/genres" onClick={()=>insist('/genres',getGenres)}>Genres</NavLink>
+          <NavLink to="/genres">Genres</NavLink>
         </li>
         <li>
-          <NavLink to="/postgame" onClick={()=>insist('postgame')}>Create Game</NavLink>
+          <NavLink to="/platforms">Platforms</NavLink>
+        </li>
+        <li>
+          <NavLink to="/create">Create Game</NavLink>
         </li>
       </ul>
     </nav>

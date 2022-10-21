@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import Style from "../styles/GameCard.module.css"
 
 const GameCard = ({game})=>{
-    let [imgStyle, setImageStyle] = useState(Style.notLoaded)
-    return<Link to={`/videogame/${game.id}`} className={Style.GameCard}>
+    const [imgStyle, setImageStyle] = useState(Style.notLoaded)
+
+    return<Link to={`/videogame/${game.id}`}  className={Style.GameCard}>
             <button className={Style.GameButton}>
             <div>
                 <img className={imgStyle}

@@ -11,7 +11,6 @@ module.exports = (sequelize) => {
     },
     name: {
       type: DataTypes.STRING,
-      unique: true,
       allowNull: false
     },
     description:{
@@ -28,9 +27,6 @@ module.exports = (sequelize) => {
         min: 0,
         max: 5
       }
-    },
-    platforms: {
-      type: DataTypes.ARRAY(DataTypes.STRING)
     },
     thumbnail: {
       type: DataTypes.STRING,

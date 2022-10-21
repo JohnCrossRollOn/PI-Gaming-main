@@ -19,11 +19,12 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
-const { addApiGenresToDB } = require('./src/api.js');
+const { addApiGenresToDB, addApiPlatformsToDB } = require('./src/api.js');
 const PORT = 3001;
 // Syncing all the models at once.
 conn.sync({ force: true })
 .then(addApiGenresToDB(1))
+.then(addApiPlatformsToDB(1))
 .then(() => {
   server.listen(PORT, () => {
     console.log(`listening at ${PORT}`); // eslint-disable-line no-console

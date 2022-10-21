@@ -1,4 +1,4 @@
-const { Videogame , Genre, Videogenre } = require('../db.js');
+const { Videogame , Genre, Platform, Videogenre, Videoplatform } = require('../db.js');
 const { Op } = require('sequelize');
 const { getApiGames, searchApiGames, getApiGame } = require('../Api.js');
 
@@ -31,7 +31,7 @@ const getGames = async (req, res, next) => {
         }
         const apiGames = name?await searchApiGames(name):await getManyApiGames();
 
-        res.json([...dbGames.map(game=>toCard(game)), ...apiGames]);
+        res.json([...apiGames, ...dbGames.map(game=>toCard(game))]);
     } catch(e) {
         next(e)
     }
@@ -44,15 +44,18 @@ const getGame = async (req, res, next) => {
 
         const dbGame = await Videogame.findByPk(id, {
             attributes: {exclude: ['id']},
-            include: {
-                model: Genre
-            }
+            include: [
+                {model: Genre},
+                {model: Platform} 
+            ]
         });
         if (dbGame) {
             res.json(dbGame)
         } else {
-            const apiGame = await getApiGame(id);
-            res.json(apiGame)
+            const apiGame = getApiGame(id);
+            apiGame
+            .then(game=>res.json(game))
+            .catch(e=>res.json({error: 'Doesn\'t exists'}))
         }
         
     } catch (e) {
@@ -60,20 +63,19 @@ const getGame = async (req, res, next) => {
     }
 }
 
-const postGames = async (req, res, next) => {
+const postGame = async (req, res, next) => {
     try {
         let {name, description, launch_date, rating, platforms, genres, thumbnail} = req.body;
         const date = new Date();
         launch_date ||= `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
         rating ||= 5;
-        thumbnail ||= 'The author didn\'provide an image';
+        thumbnail ||= 'The author didn\'t provide an image';
 
         const game = await Videogame.create({
             name,
             description,
             launch_date,
             rating,
-            platforms,
             thumbnail
         });
 
@@ -81,14 +83,25 @@ const postGames = async (req, res, next) => {
             where: {name: {[Op.iLike]: { [Op.any]: genres}}},
             attributes: ['id']
         });
+
+        const idPlatforms = await Platform.findAll({
+            where: {name: {[Op.iLike]: { [Op.any]: platforms}}},
+            attributes: ['id']
+        });
         
         await game.addGenres(idGenres.map(genre=>genre.dataValues.id), {through: Videogenre});
+        await game.addPlatforms(idPlatforms.map(platform=>platform.dataValues.id), {through: Videoplatform});
 
-        const createdGame = await Videogame.findByPk(game.id, {include: Genre});
+        const createdGame = await Videogame
+        .findByPk(game.id, 
+            {include: [
+                {model: Genre},
+                {model: Platform} 
+            ]});
         res.json(createdGame);
     } catch (e) {
-        next(e)
+        res.send(e.message)
     }
 };
 
-module.exports = {getGames, getGame, postGames}
+module.exports = {getGames, getGame, postGame}

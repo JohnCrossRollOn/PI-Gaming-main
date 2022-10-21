@@ -12,39 +12,61 @@ export const clearDisplay = ()=>dispatch=>dispatch({type: CLEAR_DISPLAY})
 export const GET_GAMES = "GET_GAMES";
 export const SEARCH_GAMES = "SEARCH_GAMES";
 export const GET_GAMEDETAIL = "GET_GAME_DETAIL";
+export const POST_GAME = "POST_GAME";
 export const GET_GENRES = "GET_GENRES";
+export const GET_PLATFORMS = "GET_PLATFORMS";
 export const ALLOW_SEARCH = "ALLOW_SEARCH";
 
 const apiUrl = `http://localhost:3001`;
 
-export const Api = async(url, parameter={})=>{
+export const getApi = async(url, content, parameter={})=>{
     const response = await fetch(`${apiUrl}/${url}`, parameter)
     return response.json()
 }
 
+export const postApi = async(url, content, parameter={})=>{
+    const response = await fetch(`${apiUrl}/${url}`, {
+        ...parameter,
+        method: "POST",
+        body: JSON.stringify(content),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+    return response.json()
+}
+
 export const getGames = ()=>dispatch=>{
-    console.log('se busco todo')
+    console.log('Getting every game!')
     dispatch({type: ALLOW_SEARCH, payload: false})
-    return Api(`videogames`)
+    dispatch({type: GET_GAMES, payload: []})
+    return getApi(`videogames`)
     .then(data=>dispatch({type: GET_GAMES, payload: data}))
 }
 
 export const searchGames = (name)=>dispatch=>{
+    console.log(`You searched for "${name}" !`)
     dispatch({type: ALLOW_SEARCH, payload: true})
-    return Api(`videogames${name?`?name=${name}`:''}`)
+    return getApi(`videogames${name?`?name=${name}`:''}`)
     .then(data=>dispatch({type: SEARCH_GAMES, payload: data}))
 }
 
 export const getGameDetail = (id)=>dispatch=>{
 
-    return Api(`videogames/${id}`)
+    return getApi(`videogames/${id}`)
     .then(data=>dispatch({type: GET_GAMEDETAIL, payload: data}))
 }
 
 export const getGenres = ()=>dispatch=>{
 
-    return Api('genres')
+    return getApi('genres')
     .then(data=>dispatch({type: GET_GENRES, payload: data}))
+}
+
+export const getPlatforms = ()=>dispatch=>{
+
+    return getApi('platforms')
+    .then(data=>dispatch({type: GET_PLATFORMS, payload: data}))
 }
 
 //SYNC
@@ -54,6 +76,8 @@ export const SAVE_SEARCHBAR = "SAVE_SEARCHBAR";
 export const SAVE_FILTERBAR = "SAVE_FILTERBAR";
 export const SAVE_SORTBAR = "SAVE_SORTBAR";
 export const CLEAR_CONSTRAINTS = "CLEAR_CONSTRAINTS";
+export const SAVE_FORM = "SAVE_FORM";
+export const CLEAR_FORM = "CLEAR_FORM";
 
 
 export const setPage = (page)=>dispatch=>dispatch({type: SET_PAGE, payload:page});
@@ -72,3 +96,6 @@ export const saveSortBar = (sortbar)=>dispatch=>{
 
 export const clearConstraints = ()=>dispatch=>dispatch({type: CLEAR_CONSTRAINTS})
 
+export const saveForm = (form)=>dispatch=>dispatch({type: SAVE_FORM, payload: form})
+
+export const clearForm = ()=>dispatch=>dispatch({type: CLEAR_FORM})

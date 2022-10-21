@@ -3,7 +3,6 @@ import { useSelector, useDispatch  } from "react-redux";
 import GameCard from "./GameCard";
 import Style from "../styles/Games.module.css"
 import { setPage } from "../global/actions";
-import CurrentFilters from "./CurrentFilters";
 
 
 const PagiButton = ({page}) => {
@@ -21,19 +20,17 @@ const Pagination = ({items}) => {
         dispatch(setPage(page));
         window.scrollTo(0, 0);
     }
-    return <>
-        {current>=1?<button onClick={()=>movePage(false)}>{'<<<'}</button>:null}
+    return <div style={{display: "flex", justifyContent: "center"}}>
+        {current>=1?<button onClick={()=>movePage('prev')}>{'<<<'}</button>:null}
         {Array.from(Array(pages).keys()).map(page=><PagiButton page={page} key={page}/>)}
-        {current+1<Math.ceil(items/15)?<button onClick={()=>movePage(true)}>{'>>>'}</button>:null}
-    </>
+        {current+1<Math.ceil(items/15)?<button onClick={()=>movePage('next')}>{'>>>'}</button>:null}
+    </div>
 };
 
 const GameCards = ()=>{
     const {display, page} = useSelector(state=>state);
 
     return <div>
-        <CurrentFilters/>
-        <hr/>
         <Pagination items={display.length}/>
         <hr/>
         {display.length>0 && <div className={Style.Games}>

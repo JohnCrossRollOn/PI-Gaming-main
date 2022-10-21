@@ -2,6 +2,7 @@ import {
     GET_GAMES,
     GET_GAMEDETAIL,
     GET_GENRES,
+    GET_PLATFORMS,
     SET_PAGE,
     SAVE_SEARCHBAR,
     SAVE_SORTBAR,
@@ -10,7 +11,9 @@ import {
     CLEAR_CONSTRAINTS,
     SEARCH_GAMES,
     ALLOW_SEARCH,
-    CLEAR_DISPLAY
+    CLEAR_DISPLAY,
+    SAVE_FORM,
+    CLEAR_FORM
 } from "./actions.js";
 import { arrayFilter } from "../components/utils"
 
@@ -19,6 +22,7 @@ const initialState = {
     display: [],
     game: null,
     genres: [],
+    platforms: [],
     searchbar: {
         input: '',
         query: '',
@@ -30,7 +34,8 @@ const initialState = {
         setting: (a,b)=>a.id-b.id
     },
     page: 0,
-    allowsearch: true
+    allowsearch: true,
+    formState: ''
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -39,6 +44,7 @@ const rootReducer = (state = initialState, action) => {
 
         return this.filter(game=>arrayFilter(game, filterbar)).sort(sortbar.setting)
     }
+
     switch(action.type) {
         case GET_GAMES:
 
@@ -64,12 +70,17 @@ const rootReducer = (state = initialState, action) => {
 
             return {...state, genres: action.payload}
 
+        case GET_PLATFORMS:
+
+            return {...state, platforms: action.payload}
+
         case SET_PAGE:
 
-            return {...state, page: typeof action.payload === 'number'?
-            action.payload:
-            action.payload?
-            state.page+1:state.page-1}
+            return {...state, page: 
+            typeof action.payload === 'number'?action.payload
+            :action.payload==='next'?state.page+1
+            :action.payload==='prev'?state.page-1
+            :0}
 
         case SAVE_SEARCHBAR:
 
@@ -77,7 +88,8 @@ const rootReducer = (state = initialState, action) => {
 
         case SAVE_FILTERBAR:
 
-            const newFilterbar = state.filterbar.some(setting=>JSON.stringify(setting)===JSON.stringify(action.payload))?
+            const newFilterbar = 
+            state.filterbar.some(setting=>JSON.stringify(setting)===JSON.stringify(action.payload))?
             [...state.filterbar].filter(item=>JSON.stringify(item)!==JSON.stringify(action.payload))
             :[...state.filterbar, action.payload ]
 
@@ -94,6 +106,15 @@ const rootReducer = (state = initialState, action) => {
             
             return {...state, page:0, filterbar:initialState.filterbar, sortbar:initialState.sortbar, display: state.games}
         
+        case SAVE_FORM:
+
+            return {...state,
+                formState: action.payload
+            }
+        case CLEAR_FORM:
+            return {...state,
+                formState: initialState.form
+            }
         case CLEAR_DISPLAY:
 
             return {...state, display: []}

@@ -1,7 +1,7 @@
 const axios = require('axios');
 require('dotenv').config();
 const { KEY } = process.env;
-const { Videogame, Videogenre, Genre } = require('./db.js');
+const { Videogame, Videogenre, Genre, Platform } = require('./db.js');
 
 const Api = axios.create({
     baseURL: 'https://api.rawg.io/api/',
@@ -41,6 +41,12 @@ const addApiGenresToDB = async (page) => {
     await Genre.bulkCreate(apiGenres)
 };
 
+const addApiPlatformsToDB = async (page) => {
+    const apiGenres = (await Api.get('/platforms', {params: {page: page}})).data.results
+    .map(({id, name})=>{return {id, name}});
+    await Platform.bulkCreate(apiGenres)
+};
+
 const getApiGames = async (page) => {
     const apiGames = (await Api.get('/games', {params: {page: page, page_size: 40}})).data.results;
     
@@ -58,4 +64,4 @@ const getApiGame = async (id) => {
     return toDetail(apiGame.data)
 };
 
-module.exports = {Api, addApiGenresToDB, getApiGames, searchApiGames, getApiGame}
+module.exports = {Api, addApiGenresToDB, addApiPlatformsToDB, getApiGames, searchApiGames, getApiGame}

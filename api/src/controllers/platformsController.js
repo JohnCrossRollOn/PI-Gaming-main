@@ -1,18 +1,18 @@
-const { Videogame , Genre } = require('../db.js');
+const { Videogame , Platform } = require('../db.js');
 
-const getGenres = async (req, res)=>{
+const getPlatforms = async (req, res)=>{
     try {
-        const genres = await Genre.findAll({
+        const platforms = await Platform.findAll({
             include: {
                 model: Videogame, 
                 attributes: ['name', 'id']
             }, 
             attributes: ['name', 'id']
         });
-        res.json(genres); 
+        res.json(platforms); 
     } catch (e) {
         res.status(400).send(e.message)
     }
 };
 
-module.exports = { getGenres }
+module.exports = { getPlatforms }

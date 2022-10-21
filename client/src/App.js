@@ -7,14 +7,17 @@ import GameDetail from './components/GameDetail';
 import Home from './components/Home';
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getGames, getGenres } from './global/actions';
+import { getGames, getGenres, getPlatforms } from './global/actions';
 import Genres from './components/Genres';
+import Platforms from './components/Platforms';
+import CreateVideogame from './components/CreateVideogame';
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect( ()=>{
     dispatch(getGames());
-    dispatch(getGenres())
+    dispatch(getGenres());
+    dispatch(getPlatforms())
   }, [dispatch]);
 
   return <div className="App">
@@ -26,7 +29,8 @@ const App = () => {
           <Route path="/videogames" component={Videogames}/>
           <Route path="/videogame/:id" component={GameDetail}/>
           <Route path="/genres" component={Genres}/>
-          <Route path="/postgame" component={Home}/>
+          <Route path="/platforms" component={Platforms}/>
+          <Route path="/create" component={CreateVideogame}/>
         </Switch>
       </Route>
     </Switch>
