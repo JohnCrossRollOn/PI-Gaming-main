@@ -6,6 +6,7 @@ import {
     SET_PAGE,
     SAVE_SEARCHBAR,
     SAVE_SORTBAR,
+    SKELE_GAMES,
     SKELE_GAME,
     SAVE_FILTERBAR,
     CLEAR_CONSTRAINTS,
@@ -49,7 +50,9 @@ const rootReducer = (state = initialState, action) => {
         case GET_GAMES:
 
             return !state.allowsearch?{...state, page:0, games: action.payload, display: action.payload.settings()}:{...state}
+        case SKELE_GAMES:
 
+            return {...state, games: []}
         case SEARCH_GAMES:
 
             return state.allowsearch?{...state, page:0, games: action.payload, display: action.payload}:{...state} 

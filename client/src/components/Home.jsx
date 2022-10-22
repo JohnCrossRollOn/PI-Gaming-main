@@ -10,7 +10,7 @@ const Home = ()=>{
         </div>
         <div className="home-route">
             <div className="home-title">
-                <p>Individual Project</p>
+                <span>Individual Project</span>
             </div>
             <Link to={"/videogames"} className="home-button">
                 <div >

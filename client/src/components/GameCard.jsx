@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const GameCard = ({game})=>{
-    const [imgStyle, setImageStyle] = useState()
+    const [imgStyle, setImageStyle] = useState("imgnotloaded")
 
     return <Link to={`/videogame/${game.id}`} className="card">
             <img
-            onLoad={()=>setImageStyle()}
+            onLoad={()=>setImageStyle('imgloaded')}
             loading="lazy"
-            className="thumbnail"
+            className={"thumbnail "+imgStyle}
             src={game.thumbnail} alt="Quite possibly, a game."/>
             <div className="card__content">
                 <strong className="card__title">{game.name}</strong>

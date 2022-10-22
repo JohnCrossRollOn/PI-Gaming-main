@@ -7,16 +7,16 @@ import FilterDropdown from "./FilterDropdown";
 import { clearConstraints } from "../global/actions";
 
 const sort_options = [
-    {name:'A-Z ⬇',
+    {name:'A → Z',
      setting: (a,b)=>a.name>b.name?1:a.name<b.name?-1:0
     },
-    {name:'A-Z ⬆',
+    {name:'Z → A',
     setting: (a,b)=>a.name>b.name?-1:a.name<b.name?1:0
     },
-    {name:'Rating ⬇',
+    {name:'★★★ → ★',
     setting: (a,b)=>a.rating>b.rating?-1:a.rating<b.rating?1:0
     }, 
-    {name:'Rating ⬆',
+    {name:'★ → ★★★',
     setting: (a,b)=>a.rating>b.rating?1:a.rating<b.rating?-1:0
     }
 ];
@@ -26,14 +26,19 @@ const VideoOptions = ()=>{
     const genres = useSelector(state=>state.genres.map(genre=>genre.name))
     const {filterbar, sortbar} = useSelector(state=>state)
 
-    return <>
-        <SearchBar/>
-        <FilterDropdown placeholder='Source' type='source' options={['db', 'api']}/>
-        <FilterDropdown placeholder='Genre' type='genres' options={genres}/>
-        <SortBar  options={sort_options}/>
-        {[(filterbar.length>0 || sortbar.name!=='') && <button key={'clear-constraints'} onClick={()=>dispatch(clearConstraints())}>Clear Filters &times;</button>]}
-        <CurrentFilters/>
-    </>
+    return <div  className="videooptions-container drop">
+        <SearchBar className="searchbar"/>
+
+        <FilterDropdown className="filter_source" placeholder='Source' type='source' options={['db', 'api']}/>
+        <FilterDropdown className="filter_genre" placeholder='Genre' type='genres' options={genres}/>
+
+        <SortBar  options={sort_options} className="sort"/>
+        {[(filterbar.length>0 || sortbar.name!=='') && <span className="throw clear_filters" key={'clear-constraints'} onClick={()=>{
+            dispatch(clearConstraints())
+            document.querySelector(".bg").scrollTo(0,0);
+        }}>Clear_Settings</span>]}
+        <CurrentFilters className="filters"/>
+    </div>
 };
 
 export default VideoOptions;

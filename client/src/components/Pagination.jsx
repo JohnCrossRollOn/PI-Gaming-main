@@ -6,7 +6,10 @@ import { setPage } from "../global/actions";
 const PagiButton = ({page}) => {
     const dispatch = useDispatch();
     const current = useSelector(state=>state.page);
-    return <span key={page} className={page===current?"pag__button__current":"pag__button"} onClick={()=>{dispatch(setPage(page))}}>{page+1}</span>
+    return <span key={page} className={page===current?"pag__button__current":"pag__button"} onClick={()=>{
+        document.querySelector(".bg").scrollTo(0,0);
+        dispatch(setPage(page))
+    }}>{page+1}</span>
 }
 
 const Pagination = ({items}) => {
@@ -15,12 +18,10 @@ const Pagination = ({items}) => {
     const pages = Math.ceil(items/15);
     
     const movePage = (page) => {
-        document.body.scrollTo({
-            top: 0,
-            behavior: 'smooth' // for smoothly scrolling
-       });
+        document.querySelector(".bg").scrollTo(0,0);
         dispatch(setPage(page));
     }
+
     return <div className="pagination">
         <div className="pagination__bar">
             {current>=1?<span className="pag__button" onClick={()=>movePage('prev')}>{'<'}</span>:null}

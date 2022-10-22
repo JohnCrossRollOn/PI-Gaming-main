@@ -22,7 +22,7 @@ const NavBar = () =>{
         <NavLink to="/videogames" activeClassName="selected" onClick={insist} className="nav-button">Videogames</NavLink>
         <NavLink to="/genres" activeClassName="selected" className="nav-button">Genres</NavLink>
         <NavLink to="/platforms"activeClassName="selected" className="nav-button">Platforms</NavLink>
-        <NavLink to="/create" activeClassName="selected" className="nav-button">Add_ Game</NavLink>
+        <NavLink to="/create" activeClassName="selected" className="nav-button">Add_Game</NavLink>
       </div>
     </nav>
 }

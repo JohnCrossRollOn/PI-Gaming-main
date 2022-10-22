@@ -8,7 +8,7 @@ const GameCards = ()=>{
 
     return <div>
         <Pagination items={display.length}/>
-        <ul className="cards">
+        <ul className="cards drop">
         {display.length>0 &&
             <>{display.slice(page*15,page*15+15).map(game=><GameCard game={game} key={game.id}/>)}</>
         }

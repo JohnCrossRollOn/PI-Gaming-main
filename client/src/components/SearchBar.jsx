@@ -18,6 +18,7 @@ const SearchBar = (props)=>{
 
     const blank = useCallback(()=>{
         dispatch(getGames());
+        document.querySelector(".bg").scrollTo(0,0);
         setSearchBar(bar=>({...bar, state:'blank', input:'', query: placeholder}))
     },[dispatch, setSearchBar])
 
@@ -34,8 +35,9 @@ const SearchBar = (props)=>{
     const entered = useCallback(
         (param)=>{
         dispatch(searchGames(SearchBar.input));
+        document.querySelector(".bg").scrollTo(0,0);
         save();
-        setSearchBar(bar=>({...bar, state:param?'typing':'entered', query: bar.input, input: param?bar.input:''}))
+        setSearchBar(bar=>({...bar, state:'entered', query: bar.input, input: param?bar.input:''}))
     }
     , [dispatch, save, setSearchBar, SearchBar.input]);
 
@@ -49,6 +51,7 @@ const SearchBar = (props)=>{
 
     return <>
         <input autoFocus autoComplete="off"
+        className={props.className}
         onKeyDown={event=>event.key==='Enter'&&SearchBar.input!==''?entered():event.key==='Escape'?blank():null} 
         value={SearchBar.input} 
         onChange={event=>typing(event)} 
@@ -56,8 +59,8 @@ const SearchBar = (props)=>{
         name="search" 
         id="search" 
         placeholder={SearchBar.query}></input>
-        {SearchBar.state==='typing'?<button onClick={()=>entered()}>&#x1F50E;&#xFE0E;</button>:
-        SearchBar.state==='entered'?<button onClick={blank}>{'\u2A2F'}</button>:null}
+        {SearchBar.state==='typing'?<button className="drop searchbar_search" onClick={()=>entered()}>&#x1F50E;&#xFE0E;</button>:
+        SearchBar.state==='entered'?<button className="drop searchbar_clear" onClick={blank}>{'\u2A2F'}</button>:<p></p>}
     </>
 };
 

@@ -80,7 +80,9 @@ export const SAVE_FORM = "SAVE_FORM";
 export const CLEAR_FORM = "CLEAR_FORM";
 
 
-export const setPage = (page)=>dispatch=>dispatch({type: SET_PAGE, payload:page});
+export const setPage = (page)=>dispatch=>{
+    dispatch({type: SET_PAGE, payload:page})
+}
 
 export const saveSearchBar = (searchbar)=>dispatch=>{
     dispatch({type: SAVE_SEARCHBAR, payload: searchbar});

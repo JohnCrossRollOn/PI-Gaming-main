@@ -5,9 +5,7 @@ import VideoOptions from "./VideoOptions";
 const Videogames = () => {
 
     return <div className='videogames'>
-        <nav className="videooptions-container">
-                <VideoOptions/>
-        </nav>
+            <VideoOptions/>
             <GameCards/>
     </div>
 };
