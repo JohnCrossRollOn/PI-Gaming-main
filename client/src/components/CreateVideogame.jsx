@@ -1,7 +1,7 @@
 import React,{ useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { clearForm, postApi, saveForm } from "../global/actions";
+import { clearForm, postApi, saveForm, getGames} from "../global/actions";
 import OptionDropdown from "./OptionDropdown";
 
 const CreateVideogame = ()=>{
@@ -98,13 +98,13 @@ const CreateVideogame = ()=>{
             errors
         })
         if (Object.values(formState.errors).every(error=>error==='')) {
+            dispatch(getGames());
             postApi('videogames/create', formState.form).then(
                 data=>{
                     setState({...formState, isSubmitted: data.id})
                     dispatch(clearForm())
                 }
             ).catch((data)=>{console.log(data)})
-           
         }
     }
         
@@ -154,7 +154,7 @@ const CreateVideogame = ()=>{
             <OptionDropdown placeholder="Platforms" name="platforms" options={platforms.map(platform=>platform.name)} onChange={manyOptionsChangeHandler}/>
 
             {formState.form.platforms.map(platform=>
-            <button type="button" key={platform} name="platforms" style={{backgroundColor:"lightgreen"}} value={platform}
+            <button type="button" key={platform} name="platforms" value={platform}
             onClick={manyOptionsChangeHandler}>
                 {platform} &times;
             </button>)}
@@ -162,7 +162,7 @@ const CreateVideogame = ()=>{
             <OptionDropdown placeholder="Genres" name="genres" options={genres.map(genre=>genre.name)} onChange={manyOptionsChangeHandler}/>
         
             {formState.form.genres.map(genre=>
-            <button type="button" key={genre} name="genres" style={{backgroundColor:"lightgreen"}} value={genre}
+            <button type="button" key={genre} name="genres" value={genre}
             onClick={manyOptionsChangeHandler}>
                 {genre} &times;
             </button>)}

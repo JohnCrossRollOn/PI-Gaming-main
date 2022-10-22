@@ -10,8 +10,7 @@ const FilterDropdown = (props)=>{
     const isActive = filterbar.some(filter=>props.type in filter);
     const isSelected = (option)=>filterbar.some(filter=>option===filter[props.type]);
     
-    return <select
-    style={isActive?{height: "max-content", backgroundColor: isActive?'lightgreen':'auto'}:{height: "max-content"}}
+    return <select className="filter"
     onChange={event=>{
         dispatch(saveFilterBar({[props.type]: event.target.value}))
         setValue('')
@@ -20,7 +19,7 @@ const FilterDropdown = (props)=>{
 
         <option value="" disabled hidden>{props.placeholder}</option>
 
-        {props.options.map(option=><option id={option} key={option} style={isSelected(option)?{backgroundColor: "gray", color: "white"}:{}}>
+        {props.options.map(option=><option id={option} key={option}>
             {option}
         </option>)}
 

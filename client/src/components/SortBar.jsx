@@ -6,17 +6,16 @@ const SortBar = ({options})=>{
     const dispatch = useDispatch();
     const saved = useSelector(state=>state.sortbar.name);
 
-    return <div style={{display: "flex", alignItems:"center", justifyContent:"space-evenly"}}>
+    return <>
         {options.map(({setting, name})=>{
         const isActive = name===saved;
         return <button 
         onClick={()=>dispatch(saveSortBar({name, setting}))} 
-        key={`${setting}`}
-        style={isActive?{backgroundColor: "lightgreen"}:{}}>
+        key={`${setting}`}>
             {name}
         </button>
     })}
-    </div>
+    </>
 };
 
 export default SortBar

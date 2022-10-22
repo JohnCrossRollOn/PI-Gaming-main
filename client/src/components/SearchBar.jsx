@@ -47,8 +47,8 @@ const SearchBar = (props)=>{
         }
     }, [SearchBar.input, SearchBar.state, entered, save, blank])
 
-    return <div>
-        <input autoFocus 
+    return <>
+        <input autoFocus autoComplete="off"
         onKeyDown={event=>event.key==='Enter'&&SearchBar.input!==''?entered():event.key==='Escape'?blank():null} 
         value={SearchBar.input} 
         onChange={event=>typing(event)} 
@@ -56,9 +56,9 @@ const SearchBar = (props)=>{
         name="search" 
         id="search" 
         placeholder={SearchBar.query}></input>
-        {SearchBar.state==='typing'?<button style={{backgroundColor:"lightgreen"}} onClick={entered}>&#x1F50E;&#xFE0E;</button>:
-        SearchBar.state==='entered'?<button style={{backgroundColor:"crimson"}} onClick={blank}>{'\u2A2F'}</button>:null}
-    </div>
+        {SearchBar.state==='typing'?<button onClick={()=>entered()}>&#x1F50E;&#xFE0E;</button>:
+        SearchBar.state==='entered'?<button onClick={blank}>{'\u2A2F'}</button>:null}
+    </>
 };
 
 export default SearchBar;

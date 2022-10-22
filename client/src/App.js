@@ -20,7 +20,7 @@ const App = () => {
     dispatch(getPlatforms())
   }, [dispatch]);
 
-  return <div className="App">
+  return <div className="App bg">
     <Switch>
       <Route exact path="/"component={Home}/>
       <Route path="/">

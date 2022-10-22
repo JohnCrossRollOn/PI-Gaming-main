@@ -1,24 +1,22 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Style from "../styles/GameCard.module.css"
 
 const GameCard = ({game})=>{
-    const [imgStyle, setImageStyle] = useState(Style.notLoaded)
+    const [imgStyle, setImageStyle] = useState()
 
-    return<Link to={`/videogame/${game.id}`}  className={Style.GameCard}>
-            <button className={Style.GameButton}>
-            <div>
-                <img className={imgStyle}
-                onLoad={()=>setImageStyle(Style.Loaded)}
-                loading="lazy" 
-                // decoding="async" 
-                src={game.thumbnail} alt="Probably a game, idk"/>
+    return <Link to={`/videogame/${game.id}`} className="card">
+            <img
+            onLoad={()=>setImageStyle()}
+            loading="lazy"
+            className="thumbnail"
+            src={game.thumbnail} alt="Quite possibly, a game."/>
+            <div className="card__content">
+                <strong className="card__title">{game.name}</strong>
+                <p style={{fontStyle:"italic"}}>{(new Array('☆','☆','☆','☆','☆')).fill('★', 0, Math.floor(game.rating))}</p>
             </div>
-            <div className={Style.GameDiv2}>
-                <strong>{game.name}</strong>
-                <p>{game.genres.join(', ')}</p>
+            <div className="card__info">
+                <p className="card__description">{game.genres.join(', ')}</p>
             </div>
-            </button>
         </Link>
 };
 

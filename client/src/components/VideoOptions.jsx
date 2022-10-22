@@ -25,19 +25,15 @@ const VideoOptions = ()=>{
     const dispatch = useDispatch();
     const genres = useSelector(state=>state.genres.map(genre=>genre.name))
     const {filterbar, sortbar} = useSelector(state=>state)
-    return <div>
+
+    return <>
         <SearchBar/>
-        <hr/>
-        <div style={{display: "flex", alignItems:"center", justifyContent:"space-evenly"}}>
-            <FilterDropdown placeholder='Source' type='source' options={['db', 'api']}/>
-            <FilterDropdown placeholder='Genre' type='genres' options={genres}/>
-        </div>
-        <SortBar 
-        options={sort_options}/>
-        <hr/>
-        {[(filterbar.length>0 || sortbar.name!=='') && <button key={'clear-constraints'} style={{height: "max-content", backgroundColor:"crimson"}} onClick={()=>dispatch(clearConstraints())}>Clear Filters &times;</button>]}
+        <FilterDropdown placeholder='Source' type='source' options={['db', 'api']}/>
+        <FilterDropdown placeholder='Genre' type='genres' options={genres}/>
+        <SortBar  options={sort_options}/>
+        {[(filterbar.length>0 || sortbar.name!=='') && <button key={'clear-constraints'} onClick={()=>dispatch(clearConstraints())}>Clear Filters &times;</button>]}
         <CurrentFilters/>
-    </div>
+    </>
 };
 
 export default VideoOptions;

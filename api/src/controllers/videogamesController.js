@@ -31,7 +31,7 @@ const getGames = async (req, res, next) => {
         }
         const apiGames = name?await searchApiGames(name):await getManyApiGames();
 
-        res.json([...apiGames, ...dbGames.map(game=>toCard(game))]);
+        res.json(!name?[...apiGames, ...dbGames.map(game=>toCard(game))]:[...dbGames.map(game=>toCard(game)), ...apiGames ].slice(0, 15));
     } catch(e) {
         next(e)
     }

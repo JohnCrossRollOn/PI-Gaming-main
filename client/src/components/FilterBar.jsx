@@ -14,8 +14,7 @@ const FilterBar = ({type, options})=>{
         }
         return <button 
         onClick={save} 
-        key={setting}
-        style={isActive?{backgroundColor: "lightgreen"}:{}}>
+        key={setting}>
             {setting}
         </button>})}
     </div>

@@ -1,17 +1,14 @@
 import React, { useEffect } from 'react';
 import GameCards from "./GameCards";
 import VideoOptions from "./VideoOptions";
-import Style from "../styles/Videogames.module.css"
 
 const Videogames = () => {
 
-    return <div className={Style.Videogames}>
-        <div className={Style.VideoOptions}>
-            <VideoOptions/>
-        </div>
-        <div className={Style.Page}>
+    return <div className='videogames'>
+        <nav className="videooptions-container">
+                <VideoOptions/>
+        </nav>
             <GameCards/>
-        </div>
     </div>
 };
 
