@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const GameCard = ({game})=>{
+const GameCard = (props)=>{
     const [imgStyle, setImageStyle] = useState("imgnotloaded")
+    const {game} = props;
 
-    return <Link to={`/videogame/${game.id}`} className="card">
+    return <Link to={`/videogame/${game.id}`} className={"card"}>
             <img
             onLoad={()=>setImageStyle('imgloaded')}
             loading="lazy"

@@ -10,12 +10,12 @@ const GameCards = ()=>{
 
     return <div className="drop">
         <Pagination items={display.length}/>
-        <ul className="cards drop">
+        <div className="cards drop">
         {display.length>0?
-        display.slice(page*15,page*15+15).map(game=>game['skeleton']?<SkeleCard key={game.id}/>:<GameCard game={game} key={game.id}/>)
+        display.slice(page*15,page*15+15).map(game=>game['skeleton']?<SkeleCard id={game.id}/>:<GameCard game={game} key={game.id}/>)
         :<ThereIsNothing/>
         }
-        </ul>
+        </div>
         <Pagination items={display.length}/>
     </div>
 };

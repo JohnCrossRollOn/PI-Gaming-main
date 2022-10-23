@@ -7,7 +7,7 @@ import {
     SAVE_SEARCHBAR,
     SAVE_SORTBAR,
     SKELE_GAMES,
-    SKELE_GAME,
+    SKELE_DETAIL,
     SAVE_FILTERBAR,
     CLEAR_CONSTRAINTS,
     SEARCH_GAMES,
@@ -20,8 +20,8 @@ import { arrayFilter } from "../components/utils"
 
 const initialState = {
     games: [],
-    display: [],
-    game: null,
+    display: [{skeleton: true}],
+    game: {skeleton: true},
     genres: [],
     platforms: [],
     searchbar: {
@@ -51,7 +51,7 @@ const rootReducer = (state = initialState, action) => {
             return !state.allowsearch?{...state, page:0, games: action.payload, display: action.payload.settings()}:{...state}
 
         case SKELE_GAMES:
-            return {...state, display: (new Array(15)).fill({skeleton: true}).map((game, id)=>({...game, id}))}
+            return {...state, display: (new Array(15)).fill({skeleton: true}).map((skeleton,id)=>({...skeleton, id}))}
 
         case SEARCH_GAMES:
             return state.allowsearch?{...state, page:0, games: action.payload, display: action.payload.settings()}:{...state} 
@@ -62,8 +62,8 @@ const rootReducer = (state = initialState, action) => {
         case GET_GAMEDETAIL:
             return {...state, game: action.payload}
 
-        case SKELE_GAME:
-            return {...state, game: null}
+        case SKELE_DETAIL:
+            return {...state, game: {skeleton: true}}
 
         case GET_GENRES:
             return {...state, genres: action.payload}

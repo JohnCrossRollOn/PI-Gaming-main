@@ -5,8 +5,8 @@ import VideoOptions from "./VideoOptions";
 const Videogames = () => {
 
     return <div className='videogames'>
-            <VideoOptions/>
-            <GameCards/>
+        <VideoOptions/>
+        <GameCards/>
     </div>
 };
 

@@ -1,10 +1,8 @@
 //UI_UX
-export const SKELE_GAME = "SKELE_GAME";
-export const SKELE_GAMES = "SKELE_GAMEDETAIL"
-export const CLEAR_DISPLAY = "CLEAR_DISPLAY";;
+export const SKELE_GAMES = "SKELE_GAMES";
+export const SKELE_DETAIL = "SKELE_DETAIL";
+export const CLEAR_DISPLAY = "CLEAR_DISPLAY";
 
-export const skeleGames = ()=>dispatch=>dispatch({type: SKELE_GAMES});
-export const skeleGame = ()=>dispatch=>dispatch({type: SKELE_GAME});
 export const clearDisplay = ()=>dispatch=>dispatch({type: CLEAR_DISPLAY})
 
 //ASYNC
@@ -53,7 +51,7 @@ export const searchGames = (name)=>dispatch=>{
 }
 
 export const getGameDetail = (id)=>dispatch=>{
-
+    dispatch({type: SKELE_DETAIL})
     return getApi(`videogames/${id}`)
     .then(data=>dispatch({type: GET_GAMEDETAIL, payload: data}))
 }
