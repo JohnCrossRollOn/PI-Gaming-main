@@ -1,17 +1,18 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getGames } from '../global/actions';
 import NavBrand from "./NavBrand.jsx";
 
 const NavBar = () =>{
   const dispatch = useDispatch();
+  const {pathname} = useLocation();
   const get = {
     Videogames: ()=>dispatch(getGames())
   }
 
   const insist = (e) => {
-    get[e.target.innerText]()
+    pathname===e.target.pathname && get[e.target.innerText]()
   }
 
   return <nav className="sticky-top drop">

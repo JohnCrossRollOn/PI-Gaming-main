@@ -23,11 +23,11 @@ const Pagination = ({items}) => {
     }
 
     return <div className="pagination">
-        <div className="pagination__bar">
+        {pages>1?<div className="pagination__bar drop">
             {current>=1?<span className="pag__button" onClick={()=>movePage('prev')}>{'<'}</span>:null}
             {Array.from(new Array(pages).keys()).map(page=><PagiButton page={page} key={page}/>)}
             {current+1<Math.ceil(items/15)?<span className="pag__button" onClick={()=>movePage('next')}>{'/>'}</span>:null}
-        </div>
+        </div>:null}
     </div>
 };
 

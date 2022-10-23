@@ -12,7 +12,7 @@ const GameCard = ({game})=>{
             src={game.thumbnail} alt="Quite possibly, a game."/>
             <div className="card__content">
                 <strong className="card__title">{game.name}</strong>
-                <p style={{fontStyle:"italic"}}>{(new Array('☆','☆','☆','☆','☆')).fill('★', 0, Math.floor(game.rating))}</p>
+                <p style={{fontStyle:"italic"}}>{['☆','☆','☆','☆','☆'].fill('★', 0, Math.floor(game.rating))}</p>
             </div>
             <div className="card__info">
                 <p className="card__description">{game.genres.join(', ')}</p>

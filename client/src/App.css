@@ -72,6 +72,26 @@
   flex-direction: column;
   justify-content: center;
 }
+
+.home-icon{
+  background-color: white;
+  width: 100rem;
+  height: 100rem;
+}
+
+.home_icon > *{
+  color: red;
+  object-fit: contain;
+}
+
+.joystick_icon{
+  filter: brightness(0);
+  top: 0;
+  right: 0;
+  position: fixed;
+  transform: scale(0.4);
+}
+
 /* /////////////////////////////////// */
 
 .brand-container {
@@ -214,6 +234,7 @@
 }
 /* NAV////////////////////////////////////////////////// */
 .nav {
+  user-select: none;
   height: 4rem;
   margin-top: 0;
   margin-bottom: 1rem;
@@ -289,9 +310,9 @@
   border-bottom: 2px solid black !important;
 }
 .searchbar_search{
-  background-color: black;
+  background-color: green;
   font-weight: bolder;
-  color: yellow;
+  color: black;
 }
 .searchbar_clear{
   font-weight: bolder;
@@ -473,6 +494,7 @@
   margin: 2rem;
 }
 .card{
+  user-select: none;
   transition: all 0.6s;
   background-color: #fafafa;
   color: black;
@@ -509,6 +531,7 @@
   opacity:1
 }
 .imgnotloaded {
+  height: 20rem;
   transition: all 1.2s;
   opacity:0
 }
@@ -532,4 +555,63 @@
   font-weight: 100;
   margin: 1rem;
 }
+.skeleton {
+  transition: all 0.6s;
+  color: black;
+  box-shadow: 0.5rem 0.5rem black;
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, .5) 50%,
+    rgba(255, 255, 255, 0) 60%
+  ) hsla(0, 0%, 100%, 0.4);
+  border-radius: 0.5rem;
+  background-size: 200% 100%;
+  background-position-x: 180%;
+  height: 30rem;
+  width: 100%;
+  animation: 1s loading ease-in-out infinite;
+}
+.skeleton_image{
+  height: 20rem;
+}
+.skeleton_content{
+  background-color: white;
+  height: 10rem;
+  border-radius: 0.5rem;
+  border-top: 2px solid black;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+@keyframes loading {
+  to {
+    background-position-x: -20%;
+  }
+}
+.nothing_container{
+  margin: 1rem;
+  padding: 1rem;
+  background-color: red;
+  transform: translate3d(0, 0, 0);
+}
+.nothing_text{
+  margin: auto;
+  font-size: 2rem;
+  font-family: monospace;
+  color: black;
+  font-weight: 900;
+}
 
+.shake {
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%, 90% {transform: translate3d(-0.5rem, 0, 0);}
+  20%, 80% {transform: translate3d(0.5rem, 0, 0);}
+  30%, 50%, 70% {transform: translate3d(-1.5rem, 0, 0);}
+  40%, 60% {transform: translate3d(1.5rem, 0, 0);}
+}

@@ -22,7 +22,8 @@ const Home = ()=>{
             <a href="https://www.soyhenry.com/">
             <img loading="lazy" className="henry-png" src="https://assets.soyhenry.com/henry-landing/assets/Henry/logo-white.png" alt="Henry logo"/>
             </a>
-        </div> 
+        </div>
+        <img className="joystick_icon" src="./joystick.png"/>
     </div>
 };
 
