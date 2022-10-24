@@ -112,52 +112,59 @@ const CreateVideogame = ()=>{
     }, [formState])
         
     return <div>
-        <form className="form" onSubmit={submitHandler}>
-    <div className="form_content">
-        <div className="form_title">
-            {formState.form.launch_date!=='' && formState.form.launch_date.split('-')[0]+', '}
+        <form className="create form drop" onSubmit={submitHandler}>
+        <div className="form_content">
+            <div className="create_title">    
+            {formState.form.launch_date!=='' && <span>{formState.form.launch_date.split('-')[0]+', '}</span>}
             <input
-            className="form_title create_title"
+            autoComplete="none"
+            className=""
             name="name"
             type="input"
             value={formState.form.name}
             onChange={controlledChangeHandler}
             placeholder={"Name"}/>
+            </div>
             {formState.errors.name ? <div  className="nothing_container shake">{formState.errors.name}</div> : null}
-        </div>
         <div className="form_paragraph">
             <div style={{fontStyle: "italic", fontWeight: "bolder"}}>
-                <OptionDropdown className="optionDropdown" placeholder="Genres" name="genres" options={genres.map(genre=>genre.name)} onChange={manyOptionsChangeHandler}/>
+                <OptionDropdown className="filter_genre create_select" placeholder="Genres" name="genres" options={genres.map(genre=>genre.name)} onChange={manyOptionsChangeHandler}/>
 
                 {formState.form.genres.map(genre=>genre!==''?
-                <button type="button" key={genre} name="genres" value={genre}
+                <button className="tags"
+                type="button" key={genre} name="genres" value={genre}
                 onClick={manyOptionsChangeHandler}>
                 {genre} &times;
                 </button>:null)}
             </div>
-            <br/>
-                <input
+            <div>
+                <textarea
+                className="create_description"
+                autoComplete="none"
                 name="description"
                 type="input"
                 value={formState.form.description}
                 onChange={controlledChangeHandler}
                 placeholder={"Description"}/>
                 {formState.errors.description ? <div  className="nothing_container shake">{formState.errors.description}</div> : null}
+            </div>
             <br/>
-            <div style={{fontSize: "1.5rem"}}>
-                {['☆','☆','☆','☆','☆'].fill('★', 0, Math.floor(formState.form.rating)).join('')+' '+`[${formState.form.rating}]`}
-                    <input
-                    name="rating"
-                    type="number"
-                    value={formState.form.rating}
-                    onChange={controlledChangeHandler}
-                    placeholder="Rating"/>
-                    {formState.errors.rating ? <div className="nothing_container shake">{formState.errors.rating}</div> : null}
-                </div>
+            <div style={{fontSize: "1.5rem"}} className="create_rating_container">
+                {['☆','☆','☆','☆','☆'].fill('★', 0, Math.floor(formState.form.rating)).join('')+' '}
+                [<input
+                className="create_rating"
+                autoComplete="none"
+                name="rating"
+                type="number"
+                value={formState.form.rating}
+                onChange={controlledChangeHandler}
+                placeholder="Rating"/>]
+                {formState.errors.rating ? <div className="nothing_container shake">{formState.errors.rating}</div> : null}
+            </div>
         </div>
     </div>
     <div className="form_card">
-        <img src={formState.form.thumbnail} alt="Upload an image."/>
+        <img className="create_img" src={formState.form.thumbnail} alt="Upload an image."/>
         <input
         name="thumbnail"
         type="input"
@@ -166,6 +173,7 @@ const CreateVideogame = ()=>{
         placeholder={"Image URL"}/>
         <div>
             <input
+            autoComplete="none"
             name="launch_date"
             type="date"
             value={formState.form.launch_date}
@@ -173,15 +181,13 @@ const CreateVideogame = ()=>{
             placeholder={"Released"}/>
             {formState.errors.launch_date ? <div  className="nothing_container shake">{formState.errors.launch_date}</div> : null}
         </div>
-        <OptionDropdown className="optionDropdown" placeholder="Platforms" name="platforms" options={platforms.map(platform=>platform.name)} onChange={manyOptionsChangeHandler}/>
-        <ul>
+        <OptionDropdown className="filter_genre" placeholder="Platforms" name="platforms" options={platforms.map(platform=>platform.name)} onChange={manyOptionsChangeHandler}/>
             {formState.form.platforms.map(platform=>platform!==''?
-            <button type="button" key={platform} name="platforms" value={platform}
+            <button type="button" className="tags" key={platform} name="platforms" value={platform}
             onClick={manyOptionsChangeHandler}>
                 {platform} &times;
             </button>:null)}
-        </ul>
-        <input type="submit" value="Submit"/>
+        <input className="submit_button home-button " type="submit" value="Submit"/>
     </div>
 </form>
         {formState.isSubmitted && <Redirect push to={`/videogame/${formState.isSubmitted}`}/>}

@@ -35,9 +35,6 @@ module.exports = (sequelize) => {
       type: DataTypes.ENUM('api','db'),
       defaultValue: 'db'
     }
-    // screenshots: {
-    //   type: DataTypes.ARRAY(DataTypes.STRING)
-    // },
   },
   {
     timestamps: false

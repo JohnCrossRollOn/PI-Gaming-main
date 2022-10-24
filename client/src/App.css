@@ -10,6 +10,17 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+input{
+  font-family: "Lexend";
+  background-color: transparent;
+}
+textarea{
+  background-color: transparent;
+}
+select{
+  font-family: "Lexend";
+}
+
 @media screen and (max-width: 768px){
   * {
     font-size: 0.85rem;
@@ -133,6 +144,14 @@
 }
 /* /////////////////////////////////// */
 /* TITLE */
+@keyframes drop_title {
+  
+  from {
+    transform: translateY(50vh);
+    opacity: 0;
+  }
+  to{}
+}
 .home-title {
   user-select: none;
   display: flex;
@@ -143,6 +162,8 @@
   font-weight: 900;
   font-size: 6rem;
   text-shadow: 10px 10px 10px black;
+  animation: drop_title 4s;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .henry-logo{
@@ -175,6 +196,7 @@
 }
 
 .home-button:hover {
+  cursor: pointer;
   transition: all 0.6s;
   background-color: hsla(0, 0%, 100%, 0.5);
   transform: translate(-10px, -10px);
@@ -307,7 +329,7 @@
   border-bottom: 2px solid black !important;
 }
 .searchbar_search{
-  background-color: green;
+  background-color: lightgreen;
   font-weight: bolder;
   color: black;
 }
@@ -337,17 +359,17 @@
   grid-row: 2;
 }
 .filter_genre {
+  outline: none;
   transition: all 0.6s;
   background-color: #fafafa;
   grid-column: 2/3;
   grid-row: 2;
 }
-.filter_genre:hover{
+.filter_genre:hover, .filter_genre:focus, .filter_source:hover, .filter_source:focus{
   transition: all 0.2s;
   cursor: pointer;
   background-color: black;
   color: yellow;
-
 }
 .filter_source:hover{
   transition: all 0.2s;
@@ -589,11 +611,12 @@
 }
 .nothing_container{
   margin: 1rem;
-  padding: 1rem;
+  padding: 1rem !important;
   background-color: red;
   transform: translate3d(0, 0, 0);
   width: fit-content;
   max-width: 70%;
+  user-select: none;
 }
 .nothing_text{
   margin: auto;
@@ -654,6 +677,7 @@
   gap: 2rem;
   margin: 1rem;
   margin-top: 4rem;
+  font-size: 1.2rem;
 }
 .form_content{
   grid-column: 1/3;
@@ -663,7 +687,6 @@
 }
 .form_title{
   user-select: none;
-  flex-direction: column;
   text-transform: uppercase;
   margin: 1rem;
   color: yellow;
@@ -674,12 +697,12 @@
 .form_paragraph{
   font-family: "montserrat";
   padding: 1rem;
+  margin-right: 4rem;
   color: white;
 }
 .form_paragraph p{
   text-shadow: 1px 2px 0px black;
   width: fit-content;
-  padding: top;
 }
 .form_card{
   grid-column: 3/4;
@@ -687,9 +710,10 @@
   box-shadow: 0.5rem 0.5rem black;
 }
 .form_card img{
+  display: inline-block;
   user-select: none;
   width: 100%;
-  height: auto; 
+  height: auto;
   border-bottom: 2px solid black;
 }
 .form_card p{
@@ -776,8 +800,19 @@
   letter-spacing: 1rem;
   width: fit-content;
 }
-
-.create_title{
+.create{
+  display: grid;
+}
+.create * {
+  display: block;
+  width: 100%;
+  transition: all 0.6s;
+  outline: none;
+  text-decoration: none;
+  border: none;
+  font-size: 1.2rem;
+}
+.create input{
   text-transform: none;
   text-decoration: none;
   background-color: transparent;
@@ -785,12 +820,66 @@
   border: none;
   border-bottom: solid 2px black;
 }
-
-.create_title:focus{
-  text-decoration: none;
-  background-color: transparent;
-  outline: none;
+.create_title{
+  display: flex;
 }
-.create_title::placeholder{
+.create_title span{
+  margin: 1rem;
+  color: yellow;
+  font-weight: 900;
+  font-size: 3rem;
+  text-shadow: 10px 10px 10px black;
+  width: fit-content;
+}
+.create_title input{
+  margin: 1rem;
+  color: yellow;
+  font-weight: 900;
+  font-size: 3rem;
+  text-shadow: 10px 10px 10px black;
+}
+.create_title input:focus{
+  text-decoration: none;
+}
+.create_title input::placeholder{
   text-shadow: none;
+}
+.create_select{
+  background-color: transparent;
+}
+.create_description{
+  min-height: 20rem;
+  min-width: 100%;
+  font-family: "montserrat";
+  padding: 1rem;
+  margin-right: 4rem;
+  color: white;
+  text-shadow: 1px 2px 0px black;
+  width: fit-content;
+}
+.create_rating_container{
+  color: white;
+  text-shadow: 1px 2px 0px black;
+}
+.create_rating{
+  color: white;
+  text-shadow: 1px 2px 0px black;
+  width: fit-content;
+  display: inline;
+  margin: 1rem;
+}
+.submit_button{
+  background-color: lightgreen !important;
+  width: fit-content!important;
+  font-size: 3rem;
+  padding: 1rem;
+  border-radius: 3rem;
+}
+.submit_button:hover{
+  background-color: black!important;
+}
+.create_img{
+  transition: all 1s;
+  background-color: gray;
+  min-height: 20rem;
 }

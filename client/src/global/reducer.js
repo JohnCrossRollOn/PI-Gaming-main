@@ -20,7 +20,9 @@ import { arrayFilter } from "../components/utils"
 
 const initialState = {
     games: [],
-    display: [{skeleton: true}],
+    display: [{
+        skeleton: true,
+    }],
     game: {skeleton: true},
     genres: [],
     platforms: [],
@@ -87,7 +89,7 @@ const rootReducer = (state = initialState, action) => {
             [...state.filterbar].filter(item=>JSON.stringify(item)!==JSON.stringify(action.payload))
             :[...state.filterbar, action.payload ]
 
-            return {...state, page:0, filterbar: newFilterbar, display: state.display[0].skeleton?state.display:state.games.settings(newFilterbar)}
+            return {...state, page:0, filterbar: newFilterbar, display: state.display[0]?.skeleton?state.display:state.games.settings(newFilterbar)}
 
         case SAVE_SORTBAR:
             return {...state, 
