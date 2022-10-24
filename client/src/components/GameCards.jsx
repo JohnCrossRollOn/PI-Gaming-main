@@ -8,7 +8,7 @@ import ThereIsNothing from "./ThereIsNothing"
 const GameCards = ()=>{
     const {display, page} = useSelector(state=>state);
 
-    return <div className="drop">
+    return <div className="drop" style={{marginBottom: "2rem"}}>
         <Pagination items={display.length}/>
         <div className="cards drop">
         {display.length>0?

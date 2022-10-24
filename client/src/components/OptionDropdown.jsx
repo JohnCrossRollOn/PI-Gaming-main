@@ -3,12 +3,13 @@ import React,{ useState } from "react";
 const OptionDropdown = (props)=>{
     const [value, setValue] = useState('')
     
-    return <select onChange={e=>{
+    return <select className={props.className}
+        onChange={e=>{
         props.onChange(e);
         setValue('');
     }} value={value} name={props.name}>
         <option value="" disabled hidden>{props.placeholder}</option>
-        {props.options.map(opt=><option name={props.name} key={opt} value={opt}>{opt}</option>)}
+        {props.options.map(option=>option!==''?<option name={props.name} key={option} value={option}>{option}</option>:null)}
     </select>
 };
 

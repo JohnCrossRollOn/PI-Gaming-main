@@ -51,7 +51,7 @@ const rootReducer = (state = initialState, action) => {
             return !state.allowsearch?{...state, page:0, games: action.payload, display: action.payload.settings()}:{...state}
 
         case SKELE_GAMES:
-            return {...state, display: (new Array(15)).fill({skeleton: true}).map((skeleton,id)=>({...skeleton, id}))}
+            return {...state, display: (new Array(15)).fill({skeleton: true}).map((skeleton,id)=>({...skeleton, id})), page: 0}
 
         case SEARCH_GAMES:
             return state.allowsearch?{...state, page:0, games: action.payload, display: action.payload.settings()}:{...state} 
@@ -104,7 +104,7 @@ const rootReducer = (state = initialState, action) => {
 
         case CLEAR_FORM:
             return {...state,
-                formState: initialState.form}
+                formState: initialState.formState}
 
         case CLEAR_DISPLAY:
             return {...state, display: []}

@@ -16,8 +16,8 @@ const CreateVideogame = ()=>{
             launch_date: '',
             rating: '',
             thumbnail: '',
-            genres: [],
-            platforms: []
+            genres: [''],
+            platforms: ['']
         },
         errors: {
             name: '',
@@ -102,85 +102,88 @@ const CreateVideogame = ()=>{
             postApi('videogames/create', formState.form).then(
                 data=>{
                     setState({...formState, isSubmitted: data.id})
-                    dispatch(clearForm())
                 }
-            ).catch((data)=>{console.log(data)})
+            )
         }
     }
         
     useEffect(()=>{
-        return ()=>dispatch(saveForm(formState))
+        return ()=>dispatch(formState.isSubmitted?clearForm():saveForm(formState))
     }, [formState])
         
     return <div>
-        <form onSubmit={submitHandler}>
-            
+        <form className="form" onSubmit={submitHandler}>
+    <div className="form_content">
+        <div className="form_title">
+            {formState.form.launch_date!=='' && formState.form.launch_date.split('-')[0]+', '}
             <input
+            className="form_title create_title"
             name="name"
             type="input"
             value={formState.form.name}
             onChange={controlledChangeHandler}
             placeholder={"Name"}/>
-            {formState.errors.name ? <div>{formState.errors.name}</div> : null}
+            {formState.errors.name ? <div  className="nothing_container shake">{formState.errors.name}</div> : null}
+        </div>
+        <div className="form_paragraph">
+            <div style={{fontStyle: "italic", fontWeight: "bolder"}}>
+                <OptionDropdown className="optionDropdown" placeholder="Genres" name="genres" options={genres.map(genre=>genre.name)} onChange={manyOptionsChangeHandler}/>
 
-            <input
-            name="description"
-            type="input"
-            value={formState.form.description}
-            onChange={controlledChangeHandler}
-            placeholder={"Description"}/>
-            {formState.errors.description ? <div>{formState.errors.description}</div> : null}
-
-            <hr/>
-
+                {formState.form.genres.map(genre=>genre!==''?
+                <button type="button" key={genre} name="genres" value={genre}
+                onClick={manyOptionsChangeHandler}>
+                {genre} &times;
+                </button>:null)}
+            </div>
+            <br/>
+                <input
+                name="description"
+                type="input"
+                value={formState.form.description}
+                onChange={controlledChangeHandler}
+                placeholder={"Description"}/>
+                {formState.errors.description ? <div  className="nothing_container shake">{formState.errors.description}</div> : null}
+            <br/>
+            <div style={{fontSize: "1.5rem"}}>
+                {['☆','☆','☆','☆','☆'].fill('★', 0, Math.floor(formState.form.rating)).join('')+' '+`[${formState.form.rating}]`}
+                    <input
+                    name="rating"
+                    type="number"
+                    value={formState.form.rating}
+                    onChange={controlledChangeHandler}
+                    placeholder="Rating"/>
+                    {formState.errors.rating ? <div className="nothing_container shake">{formState.errors.rating}</div> : null}
+                </div>
+        </div>
+    </div>
+    <div className="form_card">
+        <img src={formState.form.thumbnail} alt="Upload an image."/>
+        <input
+        name="thumbnail"
+        type="input"
+        value={formState.form.thumbnail}
+        onChange={uncontrolledImgHandler}
+        placeholder={"Image URL"}/>
+        <div>
             <input
             name="launch_date"
             type="date"
             value={formState.form.launch_date}
             onChange={controlledChangeHandler}
             placeholder={"Released"}/>
-            {formState.errors.launch_date ? <div>{formState.errors.launch_date}</div> : null}
-            
-            <input
-            name="rating"
-            type="number"
-            value={formState.form.rating}
-            onChange={controlledChangeHandler}
-            placeholder="Rating"/>
-            <div>{formState.errors.rating}</div>
-            
-            <hr/>
-
-            <OptionDropdown placeholder="Platforms" name="platforms" options={platforms.map(platform=>platform.name)} onChange={manyOptionsChangeHandler}/>
-
-            {formState.form.platforms.map(platform=>
+            {formState.errors.launch_date ? <div  className="nothing_container shake">{formState.errors.launch_date}</div> : null}
+        </div>
+        <OptionDropdown className="optionDropdown" placeholder="Platforms" name="platforms" options={platforms.map(platform=>platform.name)} onChange={manyOptionsChangeHandler}/>
+        <ul>
+            {formState.form.platforms.map(platform=>platform!==''?
             <button type="button" key={platform} name="platforms" value={platform}
             onClick={manyOptionsChangeHandler}>
                 {platform} &times;
-            </button>)}
-            <hr/>
-            <OptionDropdown placeholder="Genres" name="genres" options={genres.map(genre=>genre.name)} onChange={manyOptionsChangeHandler}/>
-        
-            {formState.form.genres.map(genre=>
-            <button type="button" key={genre} name="genres" value={genre}
-            onClick={manyOptionsChangeHandler}>
-                {genre} &times;
-            </button>)}
-
-            <hr/>
-            <input
-            name="thumbnail"
-            type="input"
-            value={formState.form.thumbnail}
-            onChange={uncontrolledImgHandler}
-            placeholder={"Image URL"}/>
-
-            <img src={formState.form.thumbnail} alt="Upload an image."/>
-
-            <hr/>
-
-            <input type="submit" value="Submit"/>
-        </form>
+            </button>:null)}
+        </ul>
+        <input type="submit" value="Submit"/>
+    </div>
+</form>
         {formState.isSubmitted && <Redirect push to={`/videogame/${formState.isSubmitted}`}/>}
     </div>
 };

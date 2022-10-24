@@ -36,16 +36,16 @@ export const postApi = async(url, content, parameter={})=>{
 
 export const getGames = ()=>dispatch=>{
     console.log('Getting every game!')
-    dispatch({type: ALLOW_SEARCH, payload: false})
-    dispatch({type: SKELE_GAMES})
+    dispatch({type: SKELE_GAMES});
+    dispatch({type: ALLOW_SEARCH, payload: false});
     return getApi(`videogames`)
     .then(data=>dispatch({type: GET_GAMES, payload: data}))
 }
 
 export const searchGames = (name)=>dispatch=>{
     console.log(`You searched for "${name}" !`)
-    dispatch({type: ALLOW_SEARCH, payload: true})
-    dispatch({type: SKELE_GAMES})
+    dispatch({type: SKELE_GAMES});
+    dispatch({type: ALLOW_SEARCH, payload: true});
     return getApi(`videogames${name?`?name=${name}`:''}`)
     .then(data=>dispatch({type: SEARCH_GAMES, payload: data}))
 }
