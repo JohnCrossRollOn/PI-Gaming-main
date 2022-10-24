@@ -9,7 +9,7 @@ const OptionDropdown = (props)=>{
         setValue('');
     }} value={value} name={props.name}>
         <option value="" disabled hidden>{props.placeholder}</option>
-        {props.options.map(option=>option!==''?<option name={props.name} key={option} value={option}>{option}</option>:null)}
+        {props.options.sort().map(option=>option!==''?<option name={props.name} key={option} value={option}>{option}</option>:null)}
     </select>
 };
 

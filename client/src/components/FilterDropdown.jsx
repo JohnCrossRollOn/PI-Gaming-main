@@ -18,7 +18,7 @@ const FilterDropdown = (props)=>{
     value={value}>
         <option value="" disabled hidden>{props.placeholder}</option>
 
-        {props.options.map(option=><option id={option} key={option}>
+        {props.options.sort((a, b)=>a-b).map(option=><option id={option} key={option}>
             {option}
         </option>)}
 
