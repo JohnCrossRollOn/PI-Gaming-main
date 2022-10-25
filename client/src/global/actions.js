@@ -1,3 +1,4 @@
+import process from "dotenv";
 //UI_UX
 export const SKELE_GAMES = "SKELE_GAMES";
 export const SKELE_DETAIL = "SKELE_DETAIL";
@@ -15,15 +16,18 @@ export const GET_GENRES = "GET_GENRES";
 export const GET_PLATFORMS = "GET_PLATFORMS";
 export const ALLOW_SEARCH = "ALLOW_SEARCH";
 
-const apiUrl = `http://localhost:3001`;
+const API_URL =
+  process.env?.NODE_ENV === "production"
+    ? "https://pi-gaming.herokuapp.com/"
+    : "http://localhost:3001";
 
 export const getApi = async(url, content, parameter={})=>{
-    const response = await fetch(`${apiUrl}/${url}`, parameter)
+    const response = await fetch(`${API_URL}/${url}`, parameter)
     return response.json()
 }
 
 export const postApi = async(url, content, parameter={})=>{
-    const response = await fetch(`${apiUrl}/${url}`, {
+    const response = await fetch(`${API_URL}/${url}`, {
         ...parameter,
         method: "POST",
         body: JSON.stringify(content),

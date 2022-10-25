@@ -20,9 +20,10 @@
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const { addApiGenresToDB, addApiPlatformsToDB } = require('./src/api.js');
-const PORT = 3001;
+require('dotenv').config();
+const PORT = process.env.PORT || 3001;
 // Syncing all the models at once.
-conn.sync({ alter: true })
+conn.sync({ force: true })
 .then(addApiGenresToDB(1))
 .then(addApiPlatformsToDB(1))
 .then(() => {

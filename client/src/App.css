@@ -22,8 +22,20 @@ select{
 }
 
 @media screen and (max-width: 768px){
-  * {
-    font-size: 0.85rem;
+  :root {
+    font-size: 2.8vw;
+  }
+  .brand-text{
+    display:none;
+  }
+  .nav {
+    gap: 0 !important;
+  }
+  .form {
+    display: inline-block !important;
+  }
+  .skeleton {
+    display: inline-block !important;
   }
 }
 ::-webkit-scrollbar {
@@ -257,12 +269,12 @@ select{
   height: 4rem;
   margin-top: 0;
   margin-bottom: 1rem;
-  padding: 1rem;
   background-color: black;
   animation: gradient 8s ease infinite;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  padding: 1rem;
   gap: 2rem
 }
 
@@ -313,6 +325,9 @@ select{
   grid-auto-rows: minmax(1fr, 1rem);
   gap: 0.5rem;
   padding: 0.5rem;
+}
+.videooptions-container *{
+  font-weight: 900 !important;;
 }
 
 .searchbar{
@@ -530,7 +545,7 @@ select{
   color: black;
   box-shadow: 0.5rem 0.5rem black;
   height: 100%;
-  border-radius: 0.5rem;
+  border-radius: 2rem;
   text-decoration: none;
 }
 .card:hover {
@@ -552,8 +567,8 @@ select{
   height: auto;
   object-fit: contain;
   display: block;
-  border-top-right-radius: 0.5rem;
-  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 2rem;
+  border-top-left-radius: 2rem;
 }
 .imgloaded {
   transition: all 1.2s;
@@ -590,7 +605,7 @@ select{
   background-size: 200% 100%;
   background-position-x: 180%;
   animation: 1s loading ease-in-out infinite;
-  border-radius: 0.5rem;
+  border-radius: 2rem;
   height: 30rem;
   width: 100%;
 }
@@ -600,8 +615,8 @@ select{
 .skeleton_content{
   background-color: white;
   height: 10rem;
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
   border-top: 2px solid black;
 }
 @keyframes loading {
@@ -684,6 +699,7 @@ select{
   grid-row: 1;
   background-color: hsla(0, 0%, 98%, 0.4);
   box-shadow: 0.5rem 0.5rem black;
+  margin-bottom: 1rem;
 }
 .form_title{
   user-select: none;
@@ -708,6 +724,7 @@ select{
   grid-column: 3/4;
   background-color: #fafafa;
   box-shadow: 0.5rem 0.5rem black;
+  padding-bottom: 0.5rem;
 }
 .form_card img{
   display: inline-block;
@@ -724,6 +741,7 @@ select{
 }
 .form_card ul{
   margin-left: 2rem;
+  padding-bottom: 2rem;
   margin-bottom: 2rem;
 }
 
@@ -864,16 +882,16 @@ select{
 .create_rating{
   color: white;
   text-shadow: 1px 2px 0px black;
-  width: fit-content;
+  width: 5rem;
   display: inline;
-  margin: 1rem;
+  margin: 0.2rem;
 }
 .submit_button{
   background-color: lightgreen !important;
   width: fit-content!important;
   font-size: 3rem;
   padding: 1rem;
-  border-radius: 3rem;
+  border-radius: 1rem;
 }
 .submit_button:hover{
   background-color: black!important;
