@@ -8,8 +8,8 @@ const OptionDropdown = (props)=>{
         props.onChange(e);
         setValue('');
     }} value={value} name={props.name}>
-        <option value="" disabled hidden>{props.placeholder}</option>
-        {props.options.sort().map(option=>option!==''?<option name={props.name} key={option} value={option}>{option}</option>:null)}
+        <option className={props.className} value="" disabled hidden>{props.placeholder}</option>
+        {props.options.sort().map(option=>option!==''?<option className={props.className} name={props.name} key={option} value={option}>{option}</option>:null)}
     </select>
 };
 

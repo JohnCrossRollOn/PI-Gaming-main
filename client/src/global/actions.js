@@ -11,6 +11,7 @@ export const clearDisplay = ()=>dispatch=>dispatch({type: CLEAR_DISPLAY})
 export const GET_GAMES = "GET_GAMES";
 export const SEARCH_GAMES = "SEARCH_GAMES";
 export const GET_GAMEDETAIL = "GET_GAME_DETAIL";
+export const CLEAR_GAMEDETAIL = "CLEAR_GAMEDETAIL";
 export const POST_GAME = "POST_GAME";
 export const GET_GENRES = "GET_GENRES";
 export const GET_PLATFORMS = "GET_PLATFORMS";
@@ -60,6 +61,8 @@ export const getGameDetail = (id)=>dispatch=>{
     .then(data=>dispatch({type: GET_GAMEDETAIL, payload: data}))
 }
 
+export const clearGameDetail = ()=>dispatch=>({type: SKELE_DETAIL})
+
 export const getGenres = ()=>dispatch=>{
 
     return getApi('genres')
@@ -77,6 +80,8 @@ export const getPlatforms = ()=>dispatch=>{
 export const SET_PAGE = "SET_PAGE";
 export const SAVE_SEARCHBAR = "SAVE_SEARCHBAR";
 export const SAVE_FILTERBAR = "SAVE_FILTERBAR";
+export const REMOVELAST_FILTERBAR = "REMOVELAST_FILTERBAR";
+export const CLEAR_FILTERBAR = "CLEAR_FILTERBAR";
 export const SAVE_SORTBAR = "SAVE_SORTBAR";
 export const CLEAR_CONSTRAINTS = "CLEAR_CONSTRAINTS";
 export const SAVE_FORM = "SAVE_FORM";
@@ -91,9 +96,17 @@ export const saveSearchBar = (searchbar)=>dispatch=>{
     dispatch({type: SAVE_SEARCHBAR, payload: searchbar});
 };
 
-export const saveFilterBar = (filterBar)=>dispatch=>{
-    dispatch({type: SAVE_FILTERBAR, payload: filterBar});
+export const saveFilterBar = (filterbar)=>dispatch=>{
+    dispatch({type: SAVE_FILTERBAR, payload: filterbar});
 };
+
+export const removeLastFilterBar = ()=>dispatch=>{
+    dispatch({type: REMOVELAST_FILTERBAR})
+}
+
+export const clearFilterBar = (filterbar)=>dispatch=>{
+    dispatch({type: CLEAR_FILTERBAR, payload: filterbar})
+}
 
 export const saveSortBar = (sortbar)=>dispatch=>{
     dispatch({type: SAVE_SORTBAR, payload: sortbar});

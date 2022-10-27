@@ -14,7 +14,9 @@ import {
     ALLOW_SEARCH,
     CLEAR_DISPLAY,
     SAVE_FORM,
-    CLEAR_FORM
+    CLEAR_FORM,
+    CLEAR_FILTERBAR,
+    REMOVELAST_FILTERBAR
 } from "./actions.js";
 import { arrayFilter } from "../components/utils"
 
@@ -63,7 +65,7 @@ const rootReducer = (state = initialState, action) => {
             
         case GET_GAMEDETAIL:
             return {...state, game: action.payload}
-
+        
         case SKELE_DETAIL:
             return {...state, game: {skeleton: true}}
 
@@ -84,18 +86,31 @@ const rootReducer = (state = initialState, action) => {
             return {...state, searchbar: action.payload}
 
         case SAVE_FILTERBAR:
-            const newFilterbar = 
+            const savedFilterbar = 
+            state.filterbar.some(setting=>JSON.stringify(setting)===JSON.stringify(action.payload))?
+            [...state.filterbar]
+            :[...state.filterbar, action.payload ];
+
+            return {...state, page:0, filterbar: savedFilterbar, display: state.display[0]?.skeleton?state.display:state.games.settings(savedFilterbar)}
+
+        case REMOVELAST_FILTERBAR:
+            const shortenedFilterbar = state.filterbar.splice(-1);
+
+            return {...state, page: 0, filterbar: shortenedFilterbar, display: state.display[0]?.skeleton?state.display:state.games.settings(shortenedFilterbar)}
+            
+        case CLEAR_FILTERBAR:
+            const clearedFilterbar = 
             state.filterbar.some(setting=>JSON.stringify(setting)===JSON.stringify(action.payload))?
             [...state.filterbar].filter(item=>JSON.stringify(item)!==JSON.stringify(action.payload))
-            :[...state.filterbar, action.payload ]
+            :[...state.filterbar];
 
-            return {...state, page:0, filterbar: newFilterbar, display: state.display[0]?.skeleton?state.display:state.games.settings(newFilterbar)}
+            return {...state, page:0, filterbar: clearedFilterbar, display: state.display[0]?.skeleton?state.display:state.games.settings(clearedFilterbar)}
 
         case SAVE_SORTBAR:
             return {...state, 
             page: 0,    
             sortbar: action.payload.name!==state.sortbar.name?action.payload:initialState.sortbar, 
-            display: state.display[0].skeleton?state.display:state.games.settings(undefined, action.payload.name!==state.sortbar.name?action.payload:initialState.sortbar)}
+            display: state.display[0]?.skeleton?state.display:state.games.settings(undefined, action.payload.name!==state.sortbar.name?action.payload:initialState.sortbar)}
 
         case CLEAR_CONSTRAINTS:
             return {...state, page:0, filterbar:initialState.filterbar, sortbar:initialState.sortbar, display: state.games}

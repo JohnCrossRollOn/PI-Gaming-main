@@ -18,6 +18,11 @@ const Home = ()=>{
                 </div>
             </Link>
         </div>
+        <div className="myself-logo">
+            <a href="https://www.linkedin.com/in/juan-rol%C3%B3n-4b58bb23a/">
+            <img loading="lazy" className="henry-png" src="https://pngimg.com/uploads/linkedIn/linkedIn_PNG16.png" alt="HIRE ME"/>
+            </a>
+        </div>
         <div className="henry-logo">
             <a href="https://www.soyhenry.com/">
             <img loading="lazy" className="henry-png" src="https://assets.soyhenry.com/henry-landing/assets/Henry/logo-white.png" alt="Henry logo"/>

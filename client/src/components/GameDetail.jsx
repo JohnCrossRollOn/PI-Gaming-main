@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getGameDetail } from "../global/actions";
+import { clearGameDetail, getGameDetail } from "../global/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import ThereIsNothing from "./ThereIsNothing";
@@ -11,6 +11,7 @@ const GameDetail = ()=>{
     const game = useSelector(state=>state.game)
     useEffect(()=>{
         dispatch(getGameDetail(id))
+        return ()=>dispatch(clearGameDetail())
     },[dispatch, id])
 
 

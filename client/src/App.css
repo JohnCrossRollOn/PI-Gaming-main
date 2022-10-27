@@ -37,6 +37,41 @@ select{
   .skeleton {
     display: inline-block !important;
   }
+  .videooptions-container {
+    transition: all 0.6s;
+    background-color: #fafafa;
+    position: sticky;
+    box-shadow: 0.5rem 0.5rem black;
+    top: 0;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr) !important;
+  }
+  .filter_source {
+    grid-column: 1/7 !important;
+    grid-row: 2 !important;
+    width: max-content!important;
+  }
+  .filter_genre {
+    grid-column: 1/7 !important;
+    grid-row: 3 !important;
+    width: max-content!important;
+  }
+  .sort{
+    grid-column: 1/7 !important;
+    grid-row: 4 !important;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: auto;
+  }
+  .filters{
+    grid-column: 2/7 !important;
+    grid-row: 6 !important;
+  }
+  .clear_filters{
+    grid-column: 1/2 !important;
+    grid-row: 6 !important;
+  }
 }
 ::-webkit-scrollbar {
   width: 0.5rem;
@@ -164,6 +199,9 @@ select{
   }
   to{}
 }
+.drop_slowly {
+  animation: drop_title 3s ease-out;
+}
 .home-title {
   user-select: none;
   display: flex;
@@ -187,6 +225,16 @@ select{
   position: absolute;
   bottom: 0;
   right: 0;
+}
+.myself-logo{
+  margin: 1rem;
+  background-color: black;
+  border: 1px solid black;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 .henry-png{
   height: 2rem;
@@ -327,7 +375,8 @@ select{
   padding: 0.5rem;
 }
 .videooptions-container *{
-  font-weight: 900 !important;;
+  font-weight: 900 !important;
+  font-size: 1.3rem !important;
 }
 
 .searchbar{
@@ -488,7 +537,7 @@ select{
 }
 .pagination__bar{
   transition: all 0.6s;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   background-color: black;
   color: white;
   box-shadow: 0.5rem 0.5rem black;
@@ -820,6 +869,7 @@ select{
 }
 .create{
   display: grid;
+  position: relative;
 }
 .create * {
   display: block;
@@ -863,6 +913,8 @@ select{
   text-shadow: none;
 }
 .create_select{
+  font-size: 1.5rem;
+  font-family: monospace;
   background-color: transparent;
 }
 .create_description{
@@ -892,6 +944,7 @@ select{
   font-size: 3rem;
   padding: 1rem;
   border-radius: 1rem;
+  margin: 1.5rem auto 1.5rem auto
 }
 .submit_button:hover{
   background-color: black!important;

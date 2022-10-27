@@ -6,18 +6,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './global/store.js'
-// import ScrollToTopWithRouter from './components/ScrollToTopWithRouter.jsx'
 import ErrorBoundary from './components/ErrorBoundary'
 
 ReactDOM.render(
   <ErrorBoundary>
     <Provider store={store}>
       <BrowserRouter>
-        {/* <ScrollToTopWithRouter> */}
-          <React.StrictMode>
-            <App />
-          </React.StrictMode>
-        {/* </ScrollToTopWithRouter> */}
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
       </BrowserRouter>
     </Provider>
   </ErrorBoundary>,

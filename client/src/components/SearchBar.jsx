@@ -1,17 +1,23 @@
 import React,{ useEffect, useState, useCallback } from "react";
-import { getGames, searchGames, setPage, saveSearchBar } from "../global/actions";
+import { getGames, searchGames, setPage, saveSearchBar, saveFilterBar } from "../global/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const SearchBar = (props)=>{
     const placeholder = 'search game';
     const savedSearchBar = useSelector(state=>state.searchbar);
+    const genres = useSelector(state=>state.genres.map(genre=>genre.name))
     const dispatch = useDispatch();
+
     
     const [SearchBar, setSearchBar] = useState(savedSearchBar.state!==''?savedSearchBar:{
         state: 'blank',
         query: placeholder,
         input: ''
     })
+
+    const compare = (genre)=>genre.toLowerCase()===SearchBar.input.toLowerCase()
+    const isAGenre = genres.some(compare);
+
     const save = useCallback(
         ()=>dispatch(saveSearchBar(SearchBar))
         , [dispatch, SearchBar]);
@@ -34,10 +40,13 @@ const SearchBar = (props)=>{
 
     const entered = useCallback(
         (param)=>{
-        dispatch(searchGames(SearchBar.input));
+        console.log(isAGenre)
+        console.log(genres.filter(compare))
+        dispatch(isAGenre?saveFilterBar({genres: genres.filter(compare)[0]}):searchGames(SearchBar.input));
+
         document.querySelector(".bg").scrollTo(0,0);
-        save();
         setSearchBar(bar=>({...bar, state:'entered', query: bar.input, input: param?bar.input:''}))
+        save();
     }
     , [dispatch, save, setSearchBar, SearchBar.input]);
 

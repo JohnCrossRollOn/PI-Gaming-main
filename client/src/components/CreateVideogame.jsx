@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { clearForm, postApi, saveForm, getGames} from "../global/actions";
 import OptionDropdown from "./OptionDropdown";
+import Brand from "./Brand"
+import LoadingMinTime from "./LoadingMinTime";
+import SkeleDetail from "./SkeleDetail";
 
 const CreateVideogame = ()=>{
     const dispatch = useDispatch();
@@ -70,7 +73,20 @@ const CreateVideogame = ()=>{
             form: {
                 ...formState.form,
                 [name]: formState.form[name].some(input=>input===value)?
-                [...formState.form[name].filter(values=>values!==value)]:[value, ...formState.form[name]]
+                formState.form[name]:[value, ...formState.form[name]]
+            }
+        })
+    }
+    const tagChangeHandler = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        
+        setState({
+            ...formState,
+            form: {
+                ...formState.form,
+                [name]: formState.form[name].some(input=>input===value)?
+                formState.form[name].filter(tag=>tag!==value):formState.form[name]
             }
         })
     }
@@ -98,9 +114,10 @@ const CreateVideogame = ()=>{
             errors
         })
         if (Object.values(formState.errors).every(error=>error==='')) {
-            dispatch(getGames());
             postApi('videogames/create', formState.form).then(
                 data=>{
+                    dispatch(getGames());
+                    dispatch(SkeleDetail());
                     setState({...formState, isSubmitted: data.id})
                 }
             )
@@ -111,8 +128,22 @@ const CreateVideogame = ()=>{
         return ()=>dispatch(formState.isSubmitted?clearForm():saveForm(formState))
     }, [formState])
         
-    return <div>
-        <form className="create form drop" onSubmit={submitHandler}>
+    return <>
+        {formState.isSubmitted?<>
+            <div className="drop_slowly">
+                <div>
+                    <p className="home-title drop">
+                        Your game was succesfully submitted to the Internet Gaming DataBase. (Obviously)
+                    </p>
+                    <div style={{textAlign:"center"}}>
+                        <a href={`/videogame/${formState.isSubmitted}`}>
+                            <input style={{textAlign:"center", fontSize: "4rem"}} className="home-button drop" value="I wanna see it." type="button"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </>
+        :<form className="create form drop" onSubmit={submitHandler}>
         <div className="form_content">
             <div className="create_title">    
             {formState.form.launch_date!=='' && <span>{formState.form.launch_date.split('-')[0]+', '}</span>}
@@ -133,7 +164,7 @@ const CreateVideogame = ()=>{
                 {formState.form.genres.map(genre=>genre!==''?
                 <button className="tags"
                 type="button" key={genre} name="genres" value={genre}
-                onClick={manyOptionsChangeHandler}>
+                onClick={tagChangeHandler}>
                 {genre} &times;
                 </button>:null)}
             </div>
@@ -181,17 +212,16 @@ const CreateVideogame = ()=>{
             placeholder={"Released"}/>
             {formState.errors.launch_date ? <div  className="nothing_container shake">{formState.errors.launch_date}</div> : null}
         </div>
-        <OptionDropdown className="filter_genre" placeholder="Platforms" name="platforms" options={platforms.map(platform=>platform.name)} onChange={manyOptionsChangeHandler}/>
+        <OptionDropdown className="filter_genre create_select" placeholder="Platforms" name="platforms" options={platforms.map(platform=>platform.name)} onChange={manyOptionsChangeHandler}/>
             {formState.form.platforms.map(platform=>platform!==''?
             <button type="button" className="tags" key={platform} name="platforms" value={platform}
-            onClick={manyOptionsChangeHandler}>
+            onClick={tagChangeHandler}>
                 {platform} &times;
             </button>:null)}
         <input className="submit_button home-button " type="submit" value="Submit"/>
     </div>
-</form>
-        {formState.isSubmitted && <Redirect push to={`/videogame/${formState.isSubmitted}`}/>}
-    </div>
+</form>}
+    </>
 };
 
 export default CreateVideogame
