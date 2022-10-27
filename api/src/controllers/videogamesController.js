@@ -33,7 +33,8 @@ const getGames = async (req, res, next) => {
 
         res.json(!name?[...apiGames, ...dbGames.map(game=>toCard(game))]:[...dbGames.map(game=>toCard(game)), ...apiGames ].slice(0, 15));
     } catch(e) {
-        next(e)
+        console.log(`There was a mistake with: ${e.message}`)
+        res.status(400).send(e.message)
     }
 }
 
@@ -59,7 +60,8 @@ const getGame = async (req, res, next) => {
         }
         
     } catch (e) {
-        next(e)
+        console.log(`There was a mistake with: ${e.message}`)
+        res.status(400).send(e.message)
     }
 }
 
@@ -100,7 +102,8 @@ const postGame = async (req, res, next) => {
             ]});
         res.json(createdGame);
     } catch (e) {
-        res.send(e.message)
+        console.log(`There was a mistake with: ${e.message}`)
+        res.status(400).send(e.message)
     }
 };
 

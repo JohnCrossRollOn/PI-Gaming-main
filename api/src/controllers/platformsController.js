@@ -11,6 +11,7 @@ const getPlatforms = async (req, res)=>{
         });
         res.json(platforms); 
     } catch (e) {
+        console.log(`There was a mistake with: ${e.message}`)
         res.status(400).send(e.message)
     }
 };
