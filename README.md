@@ -1,3 +1,7 @@
+# DEPLOY!!!
+tragically, the back-end is hosted in heroku. sad.
+https://pi-gaming.vercel.app/
+
 ![HenryLogo](https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png)
 
 # Individual Project - Henry Videogames
