@@ -19,7 +19,7 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
-const { addApiGenresToDB, addApiPlatformsToDB } = require("./src/api.js");
+const { addApiGenresToDB, addApiPlatformsToDB } = require("./src/Api.js");
 require("dotenv").config();
 const PORT = process.env.PORT || 3001;
 // Syncing all the models at once.
