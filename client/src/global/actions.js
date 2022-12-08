@@ -22,7 +22,12 @@ const API_URL =
     : "http://localhost:3001";
 
 export const getApi = async (url, content, parameter = {}) => {
-  const response = await fetch(`${API_URL}/${url}`, parameter);
+  const response = await fetch(`${API_URL}/${url}`, {
+    ...parameter,
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  });
   return response.json();
 };
 
