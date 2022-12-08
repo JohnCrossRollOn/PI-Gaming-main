@@ -17,17 +17,18 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
-const { addApiGenresToDB, addApiPlatformsToDB } = require('./src/api.js');
-require('dotenv').config();
+const server = require("./src/app.js");
+const { conn } = require("./src/db.js");
+const { addApiGenresToDB, addApiPlatformsToDB } = require("./src/api.js");
+require("dotenv").config();
 const PORT = process.env.PORT || 3001;
 // Syncing all the models at once.
-conn.sync({ force: true })
-.then(addApiGenresToDB(1))
-.then(addApiPlatformsToDB(1))
-.then(() => {
-  server.listen(PORT, () => {
-    console.log(`listening at ${PORT}`); // eslint-disable-line no-console
+conn
+  .sync({ force: true })
+  .then(addApiGenresToDB(1))
+  .then(addApiPlatformsToDB(1))
+  .then(() => {
+    server.listen(PORT, () => {
+      console.log(`listening at ${PORT}`); // eslint-disable-line no-console
+    });
   });
-});
