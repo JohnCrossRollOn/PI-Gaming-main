@@ -24,7 +24,7 @@ require("dotenv").config();
 const PORT = process.env.PORT || 3001;
 // Syncing all the models at once.
 conn
-  .sync({ force: true })
+  .sync({ force: false })
   .then(addApiGenresToDB(1))
   .then(addApiPlatformsToDB(1))
   .then(() => {
