@@ -20,6 +20,7 @@ const API_URL =
   process.env?.NODE_ENV === "production"
     ? process.env.REACT_APP_API_URL
     : "http://localhost:3001";
+console.log(API_URL);
 
 export const getApi = async (url, content, parameter = {}) => {
   const response = await fetch(`${API_URL}/${url}`, {
